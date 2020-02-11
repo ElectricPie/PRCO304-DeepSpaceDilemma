@@ -9,6 +9,8 @@ public class VRCharacterController : MonoBehaviour
     public float speed = 5.0f;
     public float gravity = 9.8f;
 
+    public Camera camera;
+
     //Private
     private CharacterController m_characterController;
 
@@ -27,14 +29,14 @@ public class VRCharacterController : MonoBehaviour
 
     private void UpdateMovement()
     {
-        Debug.Log("Left: " + Input.GetAxis("VRSecondaryAxisLeftX") + " | " + Input.GetAxis("VRSecondaryAxisLeftY"));
-
         //Get movement input
         Vector3 moveDirection = Vector3.zero;
-        // Gets the forward vector so that forward/backward movement will happen
-        moveDirection += this.transform.TransformDirection(Vector3.forward) * Input.GetAxis("VRSecondaryAxisLeftY");
-        //Gets the right vector so that right/left movement will happen
-        moveDirection += this.transform.TransformDirection(Vector3.right) * Input.GetAxis("VRSecondaryAxisLeftX");
+        //Gets the forward vector from the camera so that forward/backward movement will happen
+        moveDirection += camera.transform.TransformDirection(Vector3.forward) * Input.GetAxis("VRSecondaryAxisLeftY");
+        //Gets the right vector from the camera so that right/left movement will happen
+        moveDirection += camera.transform.TransformDirection(Vector3.right) * Input.GetAxis("VRSecondaryAxisLeftX");
+        //Removes the Y position added from the camera
+        moveDirection.y = 0;
         moveDirection *= speed;
 
         //Add gravity
