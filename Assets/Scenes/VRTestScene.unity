@@ -300,7 +300,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 89433260}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.284, y: 0.733, z: 0.915}
+  m_LocalPosition: {x: 0.284, y: 0.733, z: 0.235}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -393,7 +393,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155521428}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.228}
+  m_LocalPosition: {x: 0, y: 0, z: 0.54800004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -623,7 +623,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 514797341}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.012, y: 0.733, z: 0.915}
+  m_LocalPosition: {x: 0.012, y: 0.733, z: 0.23500001}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -719,6 +719,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &835127771 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6462528780033509148, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64,
+    type: 3}
+  m_PrefabInstance: {fileID: 6462528779376169467}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &835127775
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835127771}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1144548400
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,7 +1009,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2115280070}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.156, y: 0.733, z: 0.915}
+  m_LocalPosition: {x: 0.156, y: 0.733, z: 0.23500001}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1166,5 +1185,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: VRPlayerCharacter
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 914231400, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64, type: 3}
+    - {fileID: 317770765, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64, type: 3}
