@@ -5,20 +5,18 @@ using UnityEngine.XR;
 
 public class VRCharacterController : MonoBehaviour
 {
-    //Private
-    private Camera m_camera;
-
     // Start is called before the first frame update
     void Start()
     {
-        m_camera = this.GetComponent<Camera>();
-    
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log("Left: " + Input.GetAxis("VRSecondaryAxisLeftX") + " | " + Input.GetAxis("VRSecondaryAxisLeftY"));
+        Debug.Log("Right: " + Input.GetAxis("VRSecondaryAxisRightX") + " | " + Input.GetAxis("VRSecondaryAxisRightY"));
     }
 }
+
+
