@@ -29,7 +29,10 @@ public class GrabableObject : MonoBehaviour
         m_parent = parent;
     }
 
-    public void Drop() { 
-    
+    public void Drop() {
+        Debug.Log("Droping");
+        m_parent = null;
+        //Detatch the object from the parent
+        this.transform.parent = null;
     }
 }

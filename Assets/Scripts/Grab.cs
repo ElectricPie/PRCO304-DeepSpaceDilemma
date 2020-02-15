@@ -30,14 +30,13 @@ public class Grab : MonoBehaviour
     void Update()
     {
         //Gets the grab input
-        if (Input.GetAxis(m_handGrip) > 0.5)
+        if (Input.GetButtonDown(m_handGrip))
         {
             //Check if an object is already be held
             if (m_grabbedObject == null)
             {
                 if (m_lastCollision != null)
                 {
-                    
                     m_grabbedObject = m_lastCollision;
                     m_grabbedObject.GetComponent<GrabableObject>().Grab(this.gameObject);
                     m_lastCollision = null;
@@ -45,6 +44,8 @@ public class Grab : MonoBehaviour
             }
             else
             {
+                m_grabbedObject.GetComponent<GrabableObject>().Drop();
+                //m_grabbedObject = null;
                 //TODO: Drop item
             }
         }
