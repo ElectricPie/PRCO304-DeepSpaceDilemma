@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GrabableObject : MonoBehaviour
 {
+    //Private
+    private GameObject m_parent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +17,19 @@ public class GrabableObject : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void Grab(GameObject parent)
+    {
+        //Set the collider to a trigger so that other things can still interact
+        this.GetComponent<Collider>().isTrigger = true;
+        this.GetComponent<Rigidbody>().useGravity = false;
+        //Attach the object to the hand
+        this.transform.SetParent(parent.transform);
+        m_parent = parent;
+    }
+
+    public void Drop() { 
+    
     }
 }

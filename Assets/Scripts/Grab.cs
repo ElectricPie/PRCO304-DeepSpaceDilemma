@@ -37,14 +37,10 @@ public class Grab : MonoBehaviour
             {
                 if (m_lastCollision != null)
                 {
+                    
                     m_grabbedObject = m_lastCollision;
+                    m_grabbedObject.GetComponent<GrabableObject>().Grab(this.gameObject);
                     m_lastCollision = null;
-
-                    //Set the collider to a trigger so that other things can still interact
-                    m_grabbedObject.GetComponent<Collider>().isTrigger = true;
-                    m_grabbedObject.GetComponent<Rigidbody>().useGravity = false;
-                    //Attach the object to the hand
-                    m_grabbedObject.transform.SetParent(this.transform);
                 }
             }
             else
