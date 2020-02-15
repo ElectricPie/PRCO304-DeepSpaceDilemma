@@ -19,18 +19,31 @@ public class GrabableObject : MonoBehaviour
         
     }
 
-    public void Grab(GameObject parent)
+    /// <summary>
+    /// Attempts to grab the object, if the object is not currently grabbed
+    /// returns true
+    /// </summary>
+    /// <param name="parent"></param>
+    /// <returns></returns>
+    public bool Grab(GameObject parent)
     {
+        //Returns false if the object is already attached
+        if (m_parent != null)
+        {
+            return false;
+        }
+
         //Set the collider to a trigger so that other things can still interact
         this.GetComponent<Collider>().isTrigger = true;
         this.GetComponent<Rigidbody>().useGravity = false;
         //Attach the object to the hand
         this.transform.SetParent(parent.transform);
         m_parent = parent;
+
+        return true;
     }
 
     public void Drop() {
-        Debug.Log("Droping");
         m_parent = null;
         //Detatch the object from the parent
         this.transform.parent = null;

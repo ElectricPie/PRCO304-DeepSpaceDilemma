@@ -37,15 +37,18 @@ public class Grab : MonoBehaviour
             {
                 if (m_lastCollision != null)
                 {
-                    m_grabbedObject = m_lastCollision;
-                    m_grabbedObject.GetComponent<GrabableObject>().Grab(this.gameObject);
-                    m_lastCollision = null;
+                    //Attempt to grab the object
+                    if (m_lastCollision.GetComponent<GrabableObject>().Grab(this.gameObject)) {
+                        m_grabbedObject = m_lastCollision;
+                        m_lastCollision = null;
+                    }
                 }
             }
             else
             {
                 m_grabbedObject.GetComponent<GrabableObject>().Drop();
-                //m_grabbedObject = null;
+                //m_lastCollision = m_grabbedObject;
+                m_grabbedObject = null;
                 //TODO: Drop item
             }
         }
