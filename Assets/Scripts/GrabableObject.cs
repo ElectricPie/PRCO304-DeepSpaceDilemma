@@ -25,7 +25,7 @@ public class GrabableObject : MonoBehaviour
     /// </summary>
     /// <param name="parent"></param>
     /// <returns></returns>
-    public bool Grab(GameObject parent)
+    public virtual bool Grab(GameObject parent)
     {
         //Returns false if the object is already attached
         if (m_parent != null)
