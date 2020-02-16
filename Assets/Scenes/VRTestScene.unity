@@ -606,9 +606,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 339088421}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f538002e09dd0342ad599c8b1a2012e, type: 3}
+  m_Script: {fileID: 11500000, guid: 9031ee7380f610044bcdd4694e6fb6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grabPoint: {x: 0, y: 0.03, z: 0.05}
 --- !u!54 &339088424
 Rigidbody:
   m_ObjectHideFlags: 0

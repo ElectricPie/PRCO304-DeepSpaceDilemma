@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class WeaponGrab : GrabableObject
 {
+    public Vector3 grabPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +20,22 @@ public class WeaponGrab : GrabableObject
 
     public override bool Grab(GameObject parent)
     {
-        return base.Grab(parent);
+        //Return false if the base grab fails
+        if (!base.Grab(parent))
+        {
+            return false;
+        }
+
+
+
+        //Return true when succesful
+        return true;
+    }
+
+    void OnDrawGizmos()
+    {
+        //Create a sphere where the grab point will be
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(this.transform.position + grabPoint, 0.05f);
     }
 }
