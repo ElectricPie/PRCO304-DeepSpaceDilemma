@@ -47,27 +47,14 @@ public class Grab : MonoBehaviour
             else
             {
                 m_grabbedObject.GetComponent<GrabableObject>().Drop();
-                //m_lastCollision = m_grabbedObject;
-                m_grabbedObject = null;
-                //TODO: Drop item
-            }
-        }
-        /*
-        if (m_grabbedObject != null)
-        {
-            if (m_grabbedObject.transform.parent != this)
-            {
-                Debug.LogError("Not parent");
                 m_grabbedObject = null;
             }
         }
-        */
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("Other Tag: " + other.tag);
-
+        //Checks of the object has the grabable script
         if (other.GetComponent<GrabableObject>())
         {
             //Debug.Log("other: " + other);
@@ -77,6 +64,7 @@ public class Grab : MonoBehaviour
 
     private void OnTriggerEnteExit(Collider other)
     {
+        //Checks that the object was the last collision and removes it if it is
         if (other.GetComponent<GrabableObject>() && other.gameObject == m_lastCollision)
         {
             m_lastCollision = null;
