@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponGrab : GrabableObject
 {
     public Vector3 grabPoint;
+    public float grabRotation = 36.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +27,10 @@ public class WeaponGrab : GrabableObject
             return false;
         }
 
+        Vector3 rotation = new Vector3(grabRotation, 0, 0);
 
+        this.transform.localRotation = Quaternion.Euler(rotation);
+        this.transform.localPosition = Vector3.zero - grabPoint;
 
         //Return true when succesful
         return true;
