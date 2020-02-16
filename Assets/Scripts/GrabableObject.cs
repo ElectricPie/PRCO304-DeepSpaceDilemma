@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GrabableObject : MonoBehaviour
 {
-    //Private
-    private GameObject m_parent;
+    //Protected
+    protected GameObject m_parent;
 
     // Start is called before the first frame update
     void Start()
