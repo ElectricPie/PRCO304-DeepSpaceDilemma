@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class GrabableObject : MonoBehaviour
 {
     //Protected
@@ -33,12 +34,12 @@ public class GrabableObject : MonoBehaviour
             return false;
         }
 
+        
         //Set the collider to a trigger so that other things can still interact
         this.GetComponent<Collider>().isTrigger = true;
-        this.GetComponent<Rigidbody>().useGravity = false;
-        //Stops the object from moving if grabbed while moving
-        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        this.GetComponent<Rigidbody>().freezeRotation = true;
+        //Disables the rigidbody
+        this.GetComponent<Rigidbody>().isKinematic = true;
+       
         //Attach the object to the hand
         this.transform.SetParent(parent.transform);
         m_parent = parent;
@@ -52,10 +53,9 @@ public class GrabableObject : MonoBehaviour
         this.transform.parent = null;
         //Reenable the collider and gravity so that the object interacts with the world
         this.GetComponent<Collider>().isTrigger = false;
-        this.GetComponent<Rigidbody>().useGravity = true;
-        //Reneables movement
-        this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-        this.GetComponent<Rigidbody>().freezeRotation = false;
+        //Enables the rigidbody
+        this.GetComponent<Rigidbody>().isKinematic = false;
+
     }
 
     public virtual void Interact()
