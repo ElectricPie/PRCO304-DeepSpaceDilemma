@@ -57,4 +57,9 @@ public class GrabableObject : MonoBehaviour
         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         this.GetComponent<Rigidbody>().freezeRotation = false;
     }
+
+    public virtual void Interact()
+    {
+        
+    }
 }

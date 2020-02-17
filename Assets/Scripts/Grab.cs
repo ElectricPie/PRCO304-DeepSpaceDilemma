@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
@@ -48,6 +48,16 @@ public class Grab : MonoBehaviour
             {
                 m_grabbedObject.GetComponent<GrabableObject>().Drop();
                 m_grabbedObject = null;
+            }
+        }
+
+        //Pulling the trigger
+        if (Input.GetButtonDown("VRTrigger" + m_handGrip))
+        {
+            //Check if holding and object
+            if (m_grabbedObject != null)
+            {
+                m_grabbedObject.GetComponent<GrabableObject>().Interact();
             }
         }
     }

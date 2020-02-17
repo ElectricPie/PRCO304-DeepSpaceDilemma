@@ -42,4 +42,9 @@ public class WeaponGrab : GrabableObject
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(this.transform.position + grabPoint, 0.05f);
     }
+
+    public override void Interact()
+    {
+        Debug.Log("Firering Weapon");
+    }
 }
