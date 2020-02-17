@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
@@ -18,11 +18,11 @@ public class Grab : MonoBehaviour
     {
         if (isLeftHand)
         {
-            m_handGrip = "VRSecondaryAxisLeftGrab";
+            m_handGrip = "Left";
         }
         else
         {
-            m_handGrip = "VRSecondaryAxisRightGrab";
+            m_handGrip = "Right";
         }
     }
 
@@ -30,7 +30,7 @@ public class Grab : MonoBehaviour
     void Update()
     {
         //Gets the grab input
-        if (Input.GetButtonDown(m_handGrip))
+        if (Input.GetButtonDown("VRGrab" + m_handGrip))
         {
             //Check if an object is already be held
             if (m_grabbedObject == null)
