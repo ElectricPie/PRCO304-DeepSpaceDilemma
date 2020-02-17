@@ -610,6 +610,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPoint: {x: 0, y: 0.03, z: 0.05}
+  grabRotation: 36
+  ammo: 30
+  inpactDecal: {fileID: 5020160789685352177, guid: c3cfa36a64e71ad4689907f07da9236e,
+    type: 3}
+  fireMode: 0
 --- !u!54 &339088424
 Rigidbody:
   m_ObjectHideFlags: 0

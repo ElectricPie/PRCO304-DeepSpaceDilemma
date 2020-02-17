@@ -80,4 +80,9 @@ public class Grab : MonoBehaviour
             m_lastCollision = null;
         }
     }
+
+    public string Hand
+    {
+        get { return m_handGrip; }
+    }
 }

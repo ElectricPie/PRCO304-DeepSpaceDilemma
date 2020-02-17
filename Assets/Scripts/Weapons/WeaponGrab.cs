@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class WeaponGrab : GrabableObject
 {
+    public enum FireMode
+    {
+        safe,
+        semi,
+        full
+    }
+
     //Public
     public Vector3 grabPoint;
     public float grabRotation = 36.0f;
@@ -11,6 +18,10 @@ public class WeaponGrab : GrabableObject
     public int ammo = 30;
     //TODO: Replace with sprite
     public GameObject inpactDecal;
+
+    public FireMode fireMode;
+
+    private float fireRate = 0.2f;
 
 
     // Start is called before the first frame update
@@ -51,17 +62,45 @@ public class WeaponGrab : GrabableObject
 
     public override void Interact()
     {
-        Debug.Log("Firing");
+        if (fireMode == FireMode.semi)
+        {
+            Shoot();
+        }
+        else if(fireMode == FireMode.full)
+        {
+            InvokeRepeating("ShootFullAuto", 0.0f, fireRate);
+        }
+        else if (fireMode == FireMode.safe)
+        {
+            Debug.Log("Weapon is on 'SAFE'");
+        }
+    }
+
+    private void Shoot()
+    {
         RaycastHit hit;
-        // Does the ray intersect any objects excluding the player layer
+        //Create a raycast from the gun going forward for infinity
         if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
         {
             //TODO: Impliment damaging hit target
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            Debug.Log("Hit: " + hit.point);
+
             //TODO: Replace with creating decal
             GameObject tempImpact = Instantiate(inpactDecal);
             tempImpact.transform.position = hit.point;
         }
+    }
+
+    private void ShootFullAuto()
+    {
+        //Checks for release of the trigger
+        if (!Input.GetButton("VRTrigger" + m_parent.GetComponent<Grab>().Hand))
+        {
+            //Stops the invoke and the function
+            CancelInvoke("ShootFullAuto");
+            return;
+        }
+
+        //Shoots if the trigger is still down
+        Shoot();
     }
 }
