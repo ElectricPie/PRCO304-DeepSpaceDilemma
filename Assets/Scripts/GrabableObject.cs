@@ -47,7 +47,7 @@ public class GrabableObject : MonoBehaviour
         return true;
     }
 
-    public void Drop() {
+    public virtual void Drop() {
         m_parent = null;
         //Detatch the object from the parent
         this.transform.parent = null;
