@@ -46,8 +46,7 @@ public class Grab : MonoBehaviour
             }
             else
             {
-                m_grabbedObject.GetComponent<GrabableObject>().Drop();
-                m_grabbedObject = null;
+                DropObject();
             }
         }
 
@@ -62,12 +61,23 @@ public class Grab : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Forces the character to drop a object
+    /// </summary>
+    public void DropObject()
+    {
+        if (m_grabbedObject != null)
+        {
+            m_grabbedObject.GetComponent<GrabableObject>().Drop();
+            m_grabbedObject = null;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         //Checks of the object has the grabable script
         if (other.GetComponent<GrabableObject>())
         {
-            //Debug.Log("other: " + other);
             m_lastCollision = other.gameObject;
         }
     }
