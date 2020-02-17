@@ -62,4 +62,9 @@ public class GrabableObject : MonoBehaviour
     {
         
     }
+
+    public GameObject Parent
+    {
+        get { return m_parent; }
+    }
 }

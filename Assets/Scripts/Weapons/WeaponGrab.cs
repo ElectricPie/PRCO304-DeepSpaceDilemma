@@ -76,6 +76,16 @@ public class WeaponGrab : GrabableObject
         }
     }
 
+    public void Reload(GameObject magazine)
+    {
+        //Checks if the magazine is being held
+        if (magazine.GetComponent<GrabableObject>().Parent != null)
+        {
+            //Forces the magazine to be droped so it can be used
+            magazine.GetComponent<GrabableObject>().Parent.GetComponent<Grab>().DropObject();
+        }
+    }
+
     private void Shoot()
     {
         RaycastHit hit;

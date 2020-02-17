@@ -8,7 +8,7 @@ public class MagazineGrab : GrabableObject
     void Start()
     {
         //Prevents the magazine and weapon from colliding
-        Physics.IgnoreCollision(this.transform.parent.GetComponent<Collider>(), this.GetComponent<Collider>());
+        //Physics.IgnoreCollision(this.transform.parent.GetComponent<Collider>(), this.GetComponent<Collider>());
     }
 
     // Update is called once per frame
