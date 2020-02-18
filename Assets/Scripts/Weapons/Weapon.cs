@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponGrab : GrabableObject
+public class Weapon : GrabableObject
 {
     public enum FireMode
     {

@@ -1,10 +1,12 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MagazineGrab : GrabableObject
+public class Magazine : GrabableObject
 {
     //Private
+    [SerializeField]
+    private int m_ammoCount = 30;
     private MagZone m_magZone;
 
     // Start is called before the first frame update
@@ -42,5 +44,10 @@ public class MagazineGrab : GrabableObject
     public MagZone MagZone
     {
         set { m_magZone = value; }
+    }
+
+    public int Ammo
+    {
+        get { return m_ammoCount; }
     }
 }

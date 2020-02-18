@@ -5,13 +5,13 @@ using UnityEngine;
 public class MagZone : MonoBehaviour
 {
     //Private
-    private WeaponGrab m_weapon;
+    private Weapon m_weapon;
     public GameObject m_currentMag;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_weapon = this.transform.parent.GetComponent<WeaponGrab>();
+        m_weapon = this.transform.parent.GetComponent<Weapon>();
 
         if (m_weapon == null)
         {
@@ -27,11 +27,11 @@ public class MagZone : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //Checks of the object has the magazine grab script and checks if there is a magazine already loaded
-        if (other.GetComponent<MagazineGrab>() && m_currentMag == null)
+        if (other.GetComponent<Magazine>() && m_currentMag == null)
         {
             m_currentMag = other.gameObject;
             m_weapon.Reload(other.gameObject);
-            m_currentMag.GetComponent<MagazineGrab>().MagZone = this;
+            m_currentMag.GetComponent<Magazine>().MagZone = this;
             //Attach the magazine to the weapon
             m_currentMag.transform.parent = m_weapon.gameObject.transform;
             //Correctly sets the magazines position and rotation
