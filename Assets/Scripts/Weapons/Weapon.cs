@@ -90,7 +90,7 @@ public class Weapon : GrabableObject
     {
         RaycastHit hit;
         //Create a raycast from the gun going forward for infinity
-        if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+        if (Physics.Raycast(this.transform.position + new Vector3(0.0f,0.0f,0.4f), this.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
         {
             //TODO: Impliment damaging hit target
 
