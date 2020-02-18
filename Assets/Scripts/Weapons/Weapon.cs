@@ -105,7 +105,6 @@ public class Weapon : GrabableObject
             //Check if there is a loaded magazine and that it has ammo
             if (m_magazine != null)
             {
-                Debug.Log("Ammo Left: " + m_magazine.Ammo);
                 if (m_magazine.Ammo > 0)
                 {
                     //Use the ammo from the weapon
