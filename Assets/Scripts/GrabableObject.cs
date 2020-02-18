@@ -55,7 +55,6 @@ public class GrabableObject : MonoBehaviour
         this.GetComponent<Collider>().isTrigger = false;
         //Enables the rigidbody
         this.GetComponent<Rigidbody>().isKinematic = false;
-
     }
 
     public virtual void Interact()

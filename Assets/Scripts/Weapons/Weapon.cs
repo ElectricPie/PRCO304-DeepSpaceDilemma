@@ -21,7 +21,9 @@ public class Weapon : GrabableObject
 
     public FireMode fireMode;
 
-    private float fireRate = 0.2f;
+    //Private
+    private float m_fireRate = 0.2f;
+    private Magazine m_magazine;
 
 
     // Start is called before the first frame update
@@ -68,7 +70,7 @@ public class Weapon : GrabableObject
         }
         else if(fireMode == FireMode.full)
         {
-            InvokeRepeating("ShootFullAuto", 0.0f, fireRate);
+            InvokeRepeating("ShootFullAuto", 0.0f, m_fireRate);
         }
         else if (fireMode == FireMode.safe)
         {
@@ -78,12 +80,19 @@ public class Weapon : GrabableObject
 
     public void Reload(GameObject magazine)
     {
+        m_magazine = magazine.GetComponent<Magazine>();
+
         //Checks if the magazine is being held
-        if (magazine.GetComponent<GrabableObject>().Parent != null)
+        if (magazine.GetComponent<Magazine>().Parent != null)
         {
             //Forces the magazine to be droped so it can be used
-            magazine.GetComponent<GrabableObject>().Parent.GetComponent<Grab>().DropObject();
+            magazine.GetComponent<Magazine>().Parent.GetComponent<Grab>().DropObject();
         }
+    }
+
+    public void RemoveMagazine()
+    {
+        m_magazine = null;
     }
 
     private void Shoot()
@@ -92,11 +101,30 @@ public class Weapon : GrabableObject
         //Create a raycast from the gun going forward for infinity
         if (Physics.Raycast(this.transform.position + new Vector3(0.0f,0.0f,0.4f), this.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
         {
-            //TODO: Impliment damaging hit target
+           
+            //Check if there is a loaded magazine and that it has ammo
+            if (m_magazine != null)
+            {
+                Debug.Log("Ammo Left: " + m_magazine.Ammo);
+                if (m_magazine.Ammo > 0)
+                {
+                    //Use the ammo from the weapon
+                    m_magazine.UseAmmo();
+                    //TODO: Impliment damaging hit target
 
-            //TODO: Replace with creating decal
-            GameObject tempImpact = Instantiate(inpactDecal);
-            tempImpact.transform.position = hit.point;
+                    //TODO: Replace with creating decal
+                    GameObject tempImpact = Instantiate(inpactDecal);
+                    tempImpact.transform.position = hit.point;
+                }
+                else
+                {
+                    Debug.Log("Magazine Empty");
+                }
+            }
+            else
+            {
+                Debug.Log("No Magazine Loaded");
+            }
         }
     }
 

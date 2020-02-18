@@ -12,8 +12,7 @@ public class Magazine : GrabableObject
     // Start is called before the first frame update
     void Start()
     {
-        //Prevents the magazine and weapon from colliding
-        //Physics.IgnoreCollision(this.transform.parent.GetComponent<Collider>(), this.GetComponent<Collider>());
+
     }
 
     // Update is called once per frame
@@ -39,6 +38,11 @@ public class Magazine : GrabableObject
 
         //Return true when succesful
         return true;
+    }
+
+    public void UseAmmo()
+    {
+        m_ammoCount--;
     }
 
     public MagZone MagZone

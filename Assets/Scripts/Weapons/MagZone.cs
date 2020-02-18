@@ -6,7 +6,7 @@ public class MagZone : MonoBehaviour
 {
     //Private
     private Weapon m_weapon;
-    public GameObject m_currentMag;
+    private GameObject m_currentMag;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +22,7 @@ public class MagZone : MonoBehaviour
     public void RemoveMagazine()
     {
         m_currentMag = null;
+        m_weapon.RemoveMagazine();
     }
 
     private void OnTriggerEnter(Collider other)
