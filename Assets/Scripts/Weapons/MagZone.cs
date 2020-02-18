@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class MagZone : MonoBehaviour
 {
-    //Public
-    public GameObject currentMag;
-
     //Private
     private WeaponGrab m_weapon;
+    public GameObject m_currentMag;
 
     // Start is called before the first frame update
     void Start()
@@ -21,21 +19,27 @@ public class MagZone : MonoBehaviour
         }
     }
 
+    public void RemoveMagazine()
+    {
+        m_currentMag = null;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        //TODO: Prevent multiple magazines
-        //Checks of the object has the magazine grab script
-        if (other.GetComponent<MagazineGrab>())
+        //Checks of the object has the magazine grab script and checks if there is a magazine already loaded
+        if (other.GetComponent<MagazineGrab>() && m_currentMag == null)
         {
+            m_currentMag = other.gameObject;
             m_weapon.Reload(other.gameObject);
+            m_currentMag.GetComponent<MagazineGrab>().MagZone = this;
             //Attach the magazine to the weapon
-            other.transform.parent = m_weapon.gameObject.transform;
+            m_currentMag.transform.parent = m_weapon.gameObject.transform;
             //Correctly sets the magazines position and rotation
-            other.transform.localPosition = this.transform.localPosition;
-            other.transform.localRotation = Quaternion.Euler(Vector3.zero);
+            m_currentMag.transform.localPosition = this.transform.localPosition;
+            m_currentMag.transform.localRotation = Quaternion.Euler(Vector3.zero);
             //Prevents the new magazine from moving
-            other.GetComponent<Rigidbody>().isKinematic = true;
-            other.GetComponent<Collider>().isTrigger = true;
+            m_currentMag.GetComponent<Rigidbody>().isKinematic = true;
+            m_currentMag.GetComponent<Collider>().isTrigger = true;
         }
     }
 }
