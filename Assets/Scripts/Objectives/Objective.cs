@@ -17,10 +17,19 @@ public class Objective : MonoBehaviour
     }
 
 
-    void OnDrawGizmos()
+     void OnDrawGizmos()
     {
-        //Create a transparent green cube the size of the collider
-        Gizmos.color = new Color(0.0f, 1.0f, 0.0f, 0.5f);
-        Gizmos.DrawCube(this.GetComponent<Collider>().bounds.center, this.GetComponent<Collider>().bounds.extents * 2);
+        Collider collider = this.GetComponent<Collider>();
+
+        if (collider != null)
+        {
+            //Create a transparent green cube the size of the collider
+            Gizmos.color = new Color(0.0f, 1.0f, 0.0f, 0.5f);
+            Gizmos.DrawCube(collider.bounds.center, collider.bounds.extents * 2);
+        }
+        else
+        {
+            Debug.LogWarning(this + " is missing a collider");
+        }
     }
 }
