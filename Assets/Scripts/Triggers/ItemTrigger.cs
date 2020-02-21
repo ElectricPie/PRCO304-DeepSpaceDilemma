@@ -18,7 +18,7 @@ public class ItemTrigger : Trigger
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<ObjectiveItem>())
+        if (other.GetComponent<TriggerItem>())
         {
             Debug.Log("ITrigger Item");
             base.ActivateTrigger();
