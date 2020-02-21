@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Objective : MonoBehaviour
+public class ItemTrigger : Trigger
 {
     // Start is called before the first frame update
     void Start()
@@ -16,8 +16,16 @@ public class Objective : MonoBehaviour
         
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<ObjectiveItem>())
+        {
+            Debug.Log("ITrigger Item");
+            base.ActivateTrigger();
+        }
+    }
 
-     void OnDrawGizmos()
+    void OnDrawGizmos()
     {
         Collider collider = this.GetComponent<Collider>();
 

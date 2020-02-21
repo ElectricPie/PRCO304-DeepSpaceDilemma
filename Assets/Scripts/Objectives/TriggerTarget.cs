@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ReceiveObjective : Objective
+public class TriggerTarget : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -16,11 +16,8 @@ public class ReceiveObjective : Objective
         
     }
 
-    void OnTriggerEnter(Collider other)
+    public void Activate()
     {
-        if (other.GetComponent<ObjectiveItem>())
-        {
-            Debug.Log("Objective Item");
-        }
+
     }
 }
