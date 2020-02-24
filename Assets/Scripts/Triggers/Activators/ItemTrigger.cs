@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ItemTrigger : Trigger
 {
-    public int test;
-
     // Start is called before the first frame update
     void Start()
     {
