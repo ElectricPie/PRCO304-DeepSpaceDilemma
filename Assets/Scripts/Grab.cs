@@ -82,7 +82,7 @@ public class Grab : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnteExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         //Checks that the object was the last collision and removes it if it is
         if (other.GetComponent<GrabableObject>() && other.gameObject == m_lastCollision)

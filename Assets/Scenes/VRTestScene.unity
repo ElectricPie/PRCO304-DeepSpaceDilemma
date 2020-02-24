@@ -1414,9 +1414,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35118db98f9a86a458f7fb7ba998d976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRotation: 90
-  minRotation: -90
-  adjustmentAmount: 0
+  activateValue: -45
+  deactivateValue: 45
 --- !u!65 &1420614994
 BoxCollider:
   m_ObjectHideFlags: 0
