@@ -2,17 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(LeverTrigger))]
 public class LeverGrab : GrabableObject
 {
+    //Public
     [Range(-60, -1)]
     public float activateValue = -45.0f;
     [Range(1, 60)]
     public float deactivateValue = 45.0f;
 
+    //Private
+    LeverTrigger m_trigger;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        m_trigger = this.GetComponent<LeverTrigger>();
     }
 
     // Update is called once per frame
@@ -50,6 +55,10 @@ public class LeverGrab : GrabableObject
     private void Activate()
     {
         Debug.Log("Activated");
+        if (m_trigger != null)
+        {
+            m_trigger.Activate();
+        }
     }
 
     private void Deactivate()
