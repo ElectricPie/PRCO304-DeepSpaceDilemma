@@ -11,6 +11,6 @@ public class LeverTrigger : Trigger
 
     public void Deactivate()
     {
-
+        this.DeactivateTrigger();
     }
 }

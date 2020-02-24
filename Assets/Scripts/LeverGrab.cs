@@ -12,7 +12,8 @@ public class LeverGrab : GrabableObject
     public float deactivateValue = 45.0f;
 
     //Private
-    LeverTrigger m_trigger;
+    private LeverTrigger m_trigger;
+    private bool m_isActive;
 
     // Start is called before the first frame update
     void Start()
@@ -42,11 +43,11 @@ public class LeverGrab : GrabableObject
             xRotation -= 360;
         }
         
-        if (xRotation < activateValue)
+        if (xRotation < activateValue && !m_isActive)
         {
             Activate();
         }
-        else if (xRotation > deactivateValue)
+        else if (xRotation > deactivateValue && m_isActive)
         {
             Deactivate();
         }
@@ -59,11 +60,19 @@ public class LeverGrab : GrabableObject
         {
             m_trigger.Activate();
         }
+
+        m_isActive = true;
     }
 
     private void Deactivate()
     {
         Debug.Log("Deactivate");
+        if (m_trigger != null)
+        {
+            m_trigger.Deactivate();
+        }
+
+        m_isActive = false;
     }
 
     public override bool Grab(GameObject parent)

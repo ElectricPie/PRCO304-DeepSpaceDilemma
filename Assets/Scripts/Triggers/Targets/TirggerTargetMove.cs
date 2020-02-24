@@ -27,11 +27,15 @@ public class TirggerTargetMove : MonoBehaviour, ITriggerTarget
         this.transform.position = targetDestination;
     }
 
+    public void Deactivate()
+    {
+        this.transform.position = m_originalPosition;
+    }
+
     void OnDrawGizmos()
     {
         //Create a sphere where the object will move to
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(targetDestination, 0.05f);
     }
-
 }

@@ -12,8 +12,25 @@ public class Trigger : MonoBehaviour
         for (int i = 0; i < m_triggerTargets.Length; i++)
         {
             //Checks if the target has a the required script and if so calls the activate
-            if (m_triggerTargets[i].GetComponent<ITriggerTarget>() != null) {
+            if (m_triggerTargets[i].GetComponent<ITriggerTarget>() != null) 
+            {
                 m_triggerTargets[i].GetComponent<ITriggerTarget>().Activate(); 
+            }
+            else
+            {
+                Debug.LogWarning(this + ": target \"" + i + "\" \"" + m_triggerTargets[i] + "\" is missing Trigger Target");
+            }
+        }
+    }
+
+    protected void DeactivateTrigger()
+    {
+        for (int i = 0; i < m_triggerTargets.Length; i++)
+        {
+            //Checks if the target has a the required script and if so calls the activate
+            if (m_triggerTargets[i].GetComponent<ITriggerTarget>() != null)
+            {
+                m_triggerTargets[i].GetComponent<ITriggerTarget>().Deactivate();
             }
             else
             {
