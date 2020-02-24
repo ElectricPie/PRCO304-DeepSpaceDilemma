@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class LeverGrab : GrabableObject
 {
-    public float adjustmentAmount = 270.0f;
+    [Range(-60, -1)]
+    public float activateValue = -45.0f;
+    [Range(1, 60)]
+    public float deactivateValue = 45.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +29,32 @@ public class LeverGrab : GrabableObject
 
             this.transform.rotation = Quaternion.Euler(rotation);
         }
+
+        //Gets the current x roatation and makes the value between -90 and 90
+        float xRotation = this.transform.localRotation.eulerAngles.x;
+        if (xRotation > 90)
+        {
+            xRotation -= 360;
+        }
+        
+        if (xRotation < activateValue)
+        {
+            Activate();
+        }
+        else if (xRotation > deactivateValue)
+        {
+            Deactivate();
+        }
+    }
+
+    private void Activate()
+    {
+        Debug.Log("Activated");
+    }
+
+    private void Deactivate()
+    {
+        Debug.Log("Deactivate");
     }
 
     public override bool Grab(GameObject parent)
@@ -44,7 +73,5 @@ public class LeverGrab : GrabableObject
     public override void Drop()
     {
         m_parent = null;
-
-        Debug.Log("Relesed Lever");
     }
 }
