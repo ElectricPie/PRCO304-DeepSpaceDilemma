@@ -13,6 +13,16 @@ public class Launcher : MonoBehaviourPunCallbacks
     #endregion
 
 
+    #region Public Fields
+    [Tooltip("The UI panel which includes the button")]
+    [SerializeField]
+    private GameObject m_controlPanel;
+    [Tooltip("The UI lable to show the connection is progressing")]
+    [SerializeField]
+    private GameObject m_progressLabel;
+    #endregion
+
+
     #region Private Fields
     private string gameVersion = "1";
     #endregion
@@ -28,7 +38,9 @@ public class Launcher : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        Connect();
+        //Connect();
+        m_progressLabel.SetActive(false);
+        m_controlPanel.SetActive(true);
     }
     #endregion
 
@@ -43,6 +55,9 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnDisconnected(DisconnectCause cause)
     {
+        m_progressLabel.SetActive(false);
+        m_controlPanel.SetActive(true);
+
         Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconect() was called by PUN with reason {0}", cause);
     }
 
@@ -64,6 +79,9 @@ public class Launcher : MonoBehaviourPunCallbacks
     #region Public Methods
     public void Connect()
     {
+        m_progressLabel.SetActive(true);
+        m_controlPanel.SetActive(false);
+
         //Checks if the client is connected, if connected it will join a random room else it will attempt to connect to the server
         if (PhotonNetwork.IsConnected)
         {
