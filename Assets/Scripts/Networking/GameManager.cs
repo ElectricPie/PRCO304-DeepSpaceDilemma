@@ -12,6 +12,37 @@ namespace Net.ObjectiveComplete.DeepSpaceDilemma
 {
     public class GameManager : MonoBehaviourPunCallbacks
     {
+        #region Public Variables
+        [Tooltip("The prefab to use as the player")]
+        public GameObject playerPrefab;
+        #endregion
+
+
+        #region Monobehaviour Callbacks
+        // Start is called before the first frame update
+        void Start()
+        {
+            if (playerPrefab == null)
+            {
+                Debug.LogError("<Color=Red><a>MISSING</a></Color> playerPrefab Reference. Set it in Game Manager", this);
+            }
+            else
+            {
+                if (NonVRCharacterController.localPlayerInstance == null)
+                {
+                    Debug.LogFormat("Instantiating Local Player from {0}", SceneManagerHelper.ActiveSceneName);
+                    //Instantiate a character for this client
+                    PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0.0f, 5.0f, 0.0f), Quaternion.identity, 0);
+                }
+                else
+                {
+                    Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
+                }
+            }
+        }
+        #endregion
+
+
         #region Photon Callbacks
         public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
         {
@@ -43,12 +74,14 @@ namespace Net.ObjectiveComplete.DeepSpaceDilemma
         }
         #endregion
 
+
         #region Public Methods
         public void LeaveRoom()
         {
             PhotonNetwork.LeaveRoom();
         }
         #endregion
+
 
         #region Private Methods
         private void LoadScene()

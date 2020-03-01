@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 
+
 public class VRCharacterController : MonoBehaviour
 {
-    //Public
+    #region Public Variables
     public float speed = 5.0f;
     public float gravity = 9.8f;
 
     public GameObject body;
+    #endregion
 
-    //Private
+
+    #region Private Variables
     private CharacterController m_characterController;
+    #endregion
 
 
+    #region MonoBehavior Callbacks
     // Start is called before the first frame update
     void Start()
     {
@@ -23,10 +28,13 @@ public class VRCharacterController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
         UpdateMovement();
     }
+    #endregion
 
+
+    #region Private Methods
     private void UpdateMovement()
     {
         //Get movement input
@@ -45,6 +53,7 @@ public class VRCharacterController : MonoBehaviour
         //Apply movement to the character
         m_characterController.Move(moveDirection * Time.deltaTime);
     }
+    #endregion
 }
 
 

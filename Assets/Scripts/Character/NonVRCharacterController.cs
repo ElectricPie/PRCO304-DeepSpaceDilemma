@@ -1,34 +1,96 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class NonVRCharacterController : MonoBehaviour
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+using Photon.Pun;
+
+public class NonVRCharacterController : MonoBehaviourPunCallbacks
 {
-    //Public
+    #region Public Variables
     public float speed = 5.0f;
     public float rotationSpeed = 2.0f;
     public float gravity = 9.8f;
 
-    //Private
+    public static GameObject localPlayerInstance;
+    #endregion
+
+
+    #region Private Variables
     private CharacterController m_characterController;
     private Camera m_camera;
+    #endregion
+
+
+    #region MonoBehavior Callbacks
+    void Awake()
+    {
+        m_camera = this.transform.GetChild(0).GetComponent<Camera>();
+
+        //Used to keep track of the clients player character
+        if (photonView.IsMine) {
+            localPlayerInstance = this.gameObject;
+        }
+        else
+        {
+            Debug.Log("Camera: " + m_camera);
+            Destroy(m_camera);
+        }
+
+        //Prevents the instance from being destroy so that level synchronization is smooth
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         m_characterController = this.GetComponent<CharacterController>();
 
-        m_camera = this.transform.GetChild(0).GetComponent<Camera>();
+       // m_camera = this.transform.GetChild(0).GetComponent<Camera>();
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Stops the rest of the method if the character is not the clients
+        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
+        {
+            return;
+        }
+
         UpdateMovement();
         UpdateRotation();
         UpdateCamera();
     }
+    
 
+    void CalledOnLevelWasLoaded(int level)
+    {
+        //Checks if the character is a above an object, if it isnt then move the character
+        if (!Physics.Raycast(transform.position, -Vector3.up, 5.0f))
+        {
+            transform.position = new Vector3(0.0f, 5.0f, 0.0f);
+        }
+
+        //Removes the camera if the character is not the clients
+        if (!photonView.IsMine)
+        {
+            Destroy(m_camera);
+        }
+    }
+
+    public override void OnDisable()
+    {
+        base.OnDisable();
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    #endregion
+
+
+    #region Private Methods
     private void UpdateMovement()
     {
         //Get movement input
@@ -89,7 +151,12 @@ public class NonVRCharacterController : MonoBehaviour
         }
         
         //Apply rotation to camera
-        m_camera.transform.localRotation = Quaternion.Euler(currentRotation  );
-        
+        m_camera.transform.localRotation = Quaternion.Euler(currentRotation );
     }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode loadingMode)
+    {
+        this.CalledOnLevelWasLoaded(scene.buildIndex);
+    }
+    #endregion
 }
