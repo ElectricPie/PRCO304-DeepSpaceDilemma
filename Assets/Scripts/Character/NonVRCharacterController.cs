@@ -35,9 +35,9 @@ public class NonVRCharacterController : MonoBehaviourPunCallbacks
         else
         {
             Debug.Log("Camera: " + m_camera);
-            Destroy(m_camera);
+            Destroy(m_camera.gameObject);
         }
-
+        
         //Prevents the instance from being destroy so that level synchronization is smooth
         DontDestroyOnLoad(this.gameObject);
     }
@@ -46,8 +46,6 @@ public class NonVRCharacterController : MonoBehaviourPunCallbacks
     void Start()
     {
         m_characterController = this.GetComponent<CharacterController>();
-
-       // m_camera = this.transform.GetChild(0).GetComponent<Camera>();
 
         SceneManager.sceneLoaded += OnSceneLoaded;
     }

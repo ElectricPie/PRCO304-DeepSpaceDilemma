@@ -71,7 +71,7 @@ namespace Net.ObjectiveComplete.DeepSpaceDilemma
 
         public override void OnJoinRandomFailed(short returnCode, string message)
         {
-            Debug.Log("PUN PUN Basics Tutorial/Launcher: OnJoinRandomFailed() was called by PUN. No random romms available. Creating room");
+            Debug.Log("PUN Basics Tutorial/Launcher: OnJoinRandomFailed() was called by PUN. No random romms available. Creating room");
 
             //Creates a new room if no avaible rooms are found
             PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = m_maxPlayersPerRoom });
@@ -79,7 +79,7 @@ namespace Net.ObjectiveComplete.DeepSpaceDilemma
 
         public override void OnJoinedRoom()
         {
-            Debug.Log("PUN PUN Basics Tutorial/Launcher: OnJoinedRoom() was called by PUN. Now in a room");
+            Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() was called by PUN. Now in a room");
 
             //Changes scene if we are the only player in the room 
             if (PhotonNetwork.CurrentRoom.PlayerCount == 1)

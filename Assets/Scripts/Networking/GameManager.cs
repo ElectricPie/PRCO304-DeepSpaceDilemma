@@ -24,11 +24,12 @@ namespace Net.ObjectiveComplete.DeepSpaceDilemma
         {
             if (playerPrefab == null)
             {
-                Debug.LogError("<Color=Red><a>MISSING</a></Color> playerPrefab Reference. Set it in Game Manager", this);
+    
             }
             else
             {
-                if (NonVRCharacterController.localPlayerInstance == null)
+
+                if (VRCharacterController.localPlayerInstance == null)
                 {
                     Debug.LogFormat("Instantiating Local Player from {0}", SceneManagerHelper.ActiveSceneName);
                     //Instantiate a character for this client
@@ -91,7 +92,7 @@ namespace Net.ObjectiveComplete.DeepSpaceDilemma
                 Debug.LogError("PhotonNetwork: Trying to load scene but this is not the master client");
             }
             Debug.LogFormat("PhotonNetwork: Loading level, Player Count: {0}", PhotonNetwork.CurrentRoom.PlayerCount);
-            PhotonNetwork.LoadLevel("NetworkTestPlayers" + PhotonNetwork.CurrentRoom.PlayerCount);
+            PhotonNetwork.LoadLevel("NetworkTestPlayers1");// + PhotonNetwork.CurrentRoom.PlayerCount);
         }
         #endregion
     }
