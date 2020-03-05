@@ -5,21 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class GrabableObject : MonoBehaviour
 {
-    //Protected
+    #region Protected Variables
     protected GameObject m_parent;
+    #endregion
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    #region Public Methods
     /// <summary>
     /// Attempts to grab the object, if the object is not currently grabbed
     /// returns true
@@ -42,7 +33,12 @@ public class GrabableObject : MonoBehaviour
        
         //Attach the object to the hand
         this.transform.SetParent(parent.transform);
-        m_parent = parent;
+
+        //Dosent set a parent for sockets so they can be grabed from
+        if (!parent.GetComponent<Socket>())
+        {
+            m_parent = parent;
+        }
 
         return true;
     }
@@ -61,9 +57,13 @@ public class GrabableObject : MonoBehaviour
     {
         
     }
+    #endregion
 
+
+    #region Properties 
     public GameObject Parent
     {
         get { return m_parent; }
     }
+    #endregion
 }
