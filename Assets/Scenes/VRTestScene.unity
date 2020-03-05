@@ -897,12 +897,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_triggerTargets: []
---- !u!1 &543106044 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 632676894, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64,
-    type: 3}
-  m_PrefabInstance: {fileID: 6590026734237658150}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &745588501
 GameObject:
   m_ObjectHideFlags: 0
@@ -1931,14 +1925,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 239570484, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64, type: 3}
-      propertyPath: m_InteractionManager
-      value: 
-      objectReference: {fileID: 334728448}
-    - target: {fileID: 485239130, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64, type: 3}
-      propertyPath: body
-      value: 
-      objectReference: {fileID: 543106044}
+    - target: {fileID: 239570483, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.569
+      objectReference: {fileID: 0}
+    - target: {fileID: 239570483, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.463
+      objectReference: {fileID: 0}
+    - target: {fileID: 239570487, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6590026733900793201, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64,
         type: 3}
       propertyPath: m_Name
@@ -1998,6 +1996,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7226363838938217956, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64,
+        type: 3}
+      propertyPath: viewIdField
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64, type: 3}

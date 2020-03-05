@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class MagZone : MonoBehaviour
 {
-    //Private
+    #region Private Variables
     private Weapon m_weapon;
     private GameObject m_currentMag;
+    #endregion
 
+
+    #region Monobehaviour Callbacks
     // Start is called before the first frame update
     void Start()
     {
@@ -19,17 +22,21 @@ public class MagZone : MonoBehaviour
         }
     }
 
-    public void RemoveMagazine()
-    {
-        m_currentMag = null;
-        m_weapon.RemoveMagazine();
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         //Checks of the object has the magazine grab script and checks if there is a magazine already loaded
         if (other.GetComponent<Magazine>() && m_currentMag == null)
         {
+            //Checks if the magazine has a parent
+            if (other.GetComponent<Magazine>().Parent != null)
+            {
+                //If the magazine has a parent that is a socket then prevent reloading
+                if (other.GetComponent<Magazine>().Parent.GetComponent<Socket>() != null)
+                {
+                    return;
+                }
+            }
+
             m_currentMag = other.gameObject;
             m_weapon.Reload(other.gameObject);
             m_currentMag.GetComponent<Magazine>().MagZone = this;
@@ -41,6 +48,17 @@ public class MagZone : MonoBehaviour
             //Prevents the new magazine from moving
             m_currentMag.GetComponent<Rigidbody>().isKinematic = true;
             m_currentMag.GetComponent<Collider>().isTrigger = true;
+
         }
     }
+    #endregion
+
+
+    #region Public Methods
+    public void RemoveMagazine()
+    {
+        m_currentMag = null;
+        m_weapon.RemoveMagazine();
+    }
+    #endregion
 }
