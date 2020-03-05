@@ -24,18 +24,22 @@ public class VRCharacterController : MonoBehaviourPunCallbacks
     #region MonoBehavior Callbacks
     void Awake()
     {
-        //Used to keep track of the clients player character
-        if (photonView.IsMine)
+        //Set up the chracter if the client is connected to the server
+        if (PhotonNetwork.IsConnected)
         {
-            localPlayerInstance = this.gameObject;
-        }
-        else
-        {
-            Destroy(this.transform.GetChild(0).gameObject);
-        }
+            //Used to keep track of the clients player character
+            if (photonView.IsMine)
+            {
+                localPlayerInstance = this.gameObject;
+            }
+            else
+            {
+                Destroy(this.transform.GetChild(0).gameObject);
+            }
 
-        //Prevents the instance from being destroy so that level synchronization is smooth
-        DontDestroyOnLoad(this.gameObject);
+            //Prevents the instance from being destroy so that level synchronization is smooth
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
 
 
@@ -50,12 +54,16 @@ public class VRCharacterController : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        //Stops the rest of the method if the character is not the clients
-        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
+        //Stop the chracter if the client is connected to the server and the character is not the client
+        if (PhotonNetwork.IsConnected)
         {
-            return;
+            //Stops the rest of the method if the character is not the clients
+            if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
+            {
+                return;
+            }
         }
-        Debug.Log("Running");
+        
         UpdateMovement();
     }
 
