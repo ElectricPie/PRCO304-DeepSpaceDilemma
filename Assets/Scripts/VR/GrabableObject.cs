@@ -22,7 +22,15 @@ public class GrabableObject : MonoBehaviour
         //Returns false if the object is already attached
         if (m_parent != null)
         {
-            return false;
+            //Checks if the parent is a object socket otherwise the object shouldnt be grabbable.
+            if (!m_parent.GetComponent<Socket>()) {
+                return false;
+            }
+            else
+            {
+                //If the object is a socket it removes the object from the socket
+                m_parent.GetComponent<Socket>().RemoveObject();
+            }
         }
 
         
@@ -34,12 +42,8 @@ public class GrabableObject : MonoBehaviour
         //Attach the object to the hand
         this.transform.SetParent(parent.transform);
 
-        //Dosent set a parent for sockets so they can be grabed from
-        if (!parent.GetComponent<Socket>())
-        {
-            m_parent = parent;
-        }
-
+        m_parent = parent;
+    
         return true;
     }
 

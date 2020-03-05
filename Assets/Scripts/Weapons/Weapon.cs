@@ -11,7 +11,7 @@ public class Weapon : GrabableObject
         full
     }
 
-    //Public
+    #region Public Variables
     public Vector3 grabPoint;
     public float grabRotation = 36.0f;
 
@@ -20,24 +20,16 @@ public class Weapon : GrabableObject
     public GameObject inpactDecal;
 
     public FireMode fireMode;
+    #endregion
 
-    //Private
+
+    #region Private Variables
     private float m_fireRate = 0.2f;
     private Magazine m_magazine;
+    #endregion
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    #region Public Methods
     public override bool Grab(GameObject parent)
     {
         //Return false if the base grab fails
@@ -55,12 +47,6 @@ public class Weapon : GrabableObject
         return true;
     }
 
-    void OnDrawGizmos()
-    {
-        //Create a sphere where the grab point will be
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(this.transform.position + grabPoint, 0.05f);
-    }
 
     public override void Interact()
     {
@@ -94,7 +80,10 @@ public class Weapon : GrabableObject
     {
         m_magazine = null;
     }
+    #endregion
 
+
+    #region Private Methods
     private void Shoot()
     {
         RaycastHit hit;
@@ -140,4 +129,15 @@ public class Weapon : GrabableObject
         //Shoots if the trigger is still down
         Shoot();
     }
+    #endregion
+
+
+    #region Gizmo Methods
+    void OnDrawGizmos()
+    {
+        //Create a sphere where the grab point will be
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(this.transform.position + grabPoint, 0.05f);
+    }
+    #endregion
 }

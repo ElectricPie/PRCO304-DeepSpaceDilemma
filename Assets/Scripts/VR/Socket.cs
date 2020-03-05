@@ -4,35 +4,47 @@ using UnityEngine;
 
 public class Socket : MonoBehaviour
 {
+    #region Private Vairables
+    private Collider m_collider;
+    private GameObject m_storedObject;
+    #endregion
+
     #region MonoBehaviour Callbacks
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        m_collider = this.GetComponent<Collider>();
     }
 
     void OnTriggerStay(Collider other)
     {
         GrabableObject obj = other.GetComponent<GrabableObject>();
 
-        Debug.Log("Other: " + obj);
-
-        //Checks if the object is already being held
+        //Checks if the object is already being held and grabs it if not
         if (obj != null && obj.Parent == null)
         {
-            Debug.Log("Grabbing: <a>object</a>", obj.gameObject);
-            obj.Grab(this.gameObject);
+            if (obj.Grab(this.gameObject))
+            {
+                m_storedObject = obj.gameObject;
+                //Disables the collider from grabbing other object
+                m_collider.enabled = !m_collider.enabled;
+            }
         }
         else
         {
             Debug.Log("Not Grabbable");
         }
+    }
+    #endregion
+
+    #region Public Methods
+    /// <summary>
+    /// Removes the stored object from the socket
+    /// </summary>
+    public void RemoveObject()
+    {
+        m_storedObject = null;
+        //Reenenable the collider
+        m_collider.enabled = !m_collider.enabled;
     }
     #endregion
 }
