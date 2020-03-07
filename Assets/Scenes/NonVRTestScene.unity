@@ -723,6 +723,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1894157723, guid: 5786cdb90af3ecb468b0db8e10a2212f, type: 3}
+      propertyPath: viewIdField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5045923360969710499, guid: 5786cdb90af3ecb468b0db8e10a2212f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -778,6 +782,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5045923360969710500, guid: 5786cdb90af3ecb468b0db8e10a2212f,
+        type: 3}
+      propertyPath: m_startingHealth
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 5045923360969710501, guid: 5786cdb90af3ecb468b0db8e10a2212f,
         type: 3}
       propertyPath: m_Name
@@ -831,8 +840,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_triggerTargets: []
-  maxRotation: 0
-  minRotation: 0
 --- !u!1 &745588501
 GameObject:
   m_ObjectHideFlags: 0
@@ -1637,8 +1644,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_triggerTargets: []
-  maxRotation: 325
-  minRotation: 230
 --- !u!65 &1789542796
 BoxCollider:
   m_ObjectHideFlags: 0
