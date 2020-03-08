@@ -15,7 +15,6 @@ public class Weapon : GrabableObject
     public Vector3 grabPoint;
     public float grabRotation = 36.0f;
 
-    public int ammo = 30;
     //TODO: Replace with sprite
     public GameObject inpactDecal;
 
@@ -27,6 +26,10 @@ public class Weapon : GrabableObject
     [Tooltip("The amount of damage the weapon will deal if a shot hits a character")]
     [SerializeField]
     private int m_damage = 4;
+
+    [Tooltip("The local position on the weapon where the raycast will start")]
+    [SerializeField]
+    private Vector3 m_raycastStart = Vector3.zero;
 
     private float m_fireRate = 0.2f;
     private Magazine m_magazine;
@@ -91,8 +94,8 @@ public class Weapon : GrabableObject
     private void Shoot()
     {
         RaycastHit hit;
-        //Create a raycast from the gun going forward for infinity
-        if (Physics.Raycast(this.transform.position + new Vector3(0.0f,0.0f,0.4f), this.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+        //Create a raycast from the guns raycast start point going forward for infinity
+        if (Physics.Raycast(this.transform.localPosition + m_raycastStart, this.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
         {
            
             //Check if there is a loaded magazine
@@ -148,6 +151,9 @@ public class Weapon : GrabableObject
         //Create a sphere where the grab point will be
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(this.transform.position + grabPoint, 0.05f);
+        //Creates a green cube where the raycast start will be
+        Gizmos.color = Color.green;
+        Gizmos.DrawCube(this.transform.localPosition + m_raycastStart, new Vector3(0.05f, 0.05f, 0.05f));
     }
     #endregion
 }

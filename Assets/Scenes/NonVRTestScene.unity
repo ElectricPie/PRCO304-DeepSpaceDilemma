@@ -919,6 +919,21 @@ PrefabInstance:
       propertyPath: m_damage
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 244980791322135265, guid: ed7f3c7148912c34185a0b07720844ce,
+        type: 3}
+      propertyPath: m_raycastStart.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 244980791322135265, guid: ed7f3c7148912c34185a0b07720844ce,
+        type: 3}
+      propertyPath: m_raycastStart.y
+      value: 0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 244980791322135265, guid: ed7f3c7148912c34185a0b07720844ce,
+        type: 3}
+      propertyPath: m_raycastStart.z
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 244980791322135267, guid: ed7f3c7148912c34185a0b07720844ce,
         type: 3}
       propertyPath: m_Name
