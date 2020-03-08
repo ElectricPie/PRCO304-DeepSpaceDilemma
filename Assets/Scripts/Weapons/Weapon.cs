@@ -24,6 +24,10 @@ public class Weapon : GrabableObject
 
 
     #region Private Variables
+    [Tooltip("The amount of damage the weapon will deal if a shot hits a character")]
+    [SerializeField]
+    private int m_damage = 4;
+
     private float m_fireRate = 0.2f;
     private Magazine m_magazine;
     #endregion
@@ -91,14 +95,20 @@ public class Weapon : GrabableObject
         if (Physics.Raycast(this.transform.position + new Vector3(0.0f,0.0f,0.4f), this.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
         {
            
-            //Check if there is a loaded magazine and that it has ammo
+            //Check if there is a loaded magazine
             if (m_magazine != null)
             {
+                //Check that the magazine has ammo in it
                 if (m_magazine.Ammo > 0)
                 {
                     //Use the ammo from the weapon
                     m_magazine.UseAmmo();
-                    //TODO: Impliment damaging hit target
+                    
+                    //Deal damage to the first hit if they are a character
+                    if (hit.transform.GetComponent<Character>())
+                    {
+                        hit.transform.GetComponent<Character>().TakeDamage(m_damage);
+                    }
 
                     //TODO: Replace with creating decal
                     GameObject tempImpact = Instantiate(inpactDecal);

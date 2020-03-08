@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 using Photon.Pun;
 
-public class NonVRCharacterController : MonoBehaviourPunCallbacks
+public class NonVRCharacterController : Character
 {
     #region Public Variables
     public float speed = 5.0f;
@@ -34,8 +34,12 @@ public class NonVRCharacterController : MonoBehaviourPunCallbacks
         }
         else
         {
-            Debug.Log("Camera: " + m_camera);
-            Destroy(m_camera.gameObject);
+            //Removes the camerea from the character if the client is connected 
+            // and it is not the clients character
+            if (PhotonNetwork.IsConnected)
+            {
+                Destroy(m_camera.gameObject);
+            }
         }
         
         //Prevents the instance from being destroy so that level synchronization is smooth
