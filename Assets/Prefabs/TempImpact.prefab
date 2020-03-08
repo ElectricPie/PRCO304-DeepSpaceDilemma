@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3248565101700169298}
   - component: {fileID: 6373560401142768325}
   - component: {fileID: 1497553155296210764}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TempImpact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
