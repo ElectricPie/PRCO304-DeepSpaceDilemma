@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 using Photon.Pun;
 
-public class NonVRCharacterController : MonoBehaviourPunCallbacks
+public class NonVRCharacterController : Character
 {
     #region Public Variables
     public float speed = 5.0f;
