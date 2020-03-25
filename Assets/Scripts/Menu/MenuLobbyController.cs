@@ -40,8 +40,24 @@ public class MenuLobbyController : MonoBehaviour
     #region Public Methods
     public void EnterCodeCharacter(char codeValue)
     {
-        m_enteredCode += codeValue;
-        Debug.Log("Entered: " + m_enteredCode);
+        //Removes a character from the string
+        if (codeValue == '<' && m_enteredCode.Length > 0)
+        {
+            m_enteredCode = m_enteredCode.Remove(m_enteredCode.Length - 1);
+        }
+        //Attempt to join the lobby
+        else if (codeValue == '>')
+        {
+
+        }
+        else
+        {
+            m_enteredCode += codeValue;
+            Debug.Log("Entered: " + m_enteredCode);
+        }
+
+
+        
         UpdateText();
     }
     #endregion
