@@ -10,6 +10,10 @@ public class MenuLobbyController : MonoBehaviour
     [SerializeField]
     private TextMesh m_codeDisplay;
 
+    [Tooltip("The maximum lenth of the code")]
+    [SerializeField]
+    private int m_maxCodeLength;
+
     private string m_enteredCode;
     #endregion
 
@@ -45,19 +49,20 @@ public class MenuLobbyController : MonoBehaviour
         {
             m_enteredCode = m_enteredCode.Remove(m_enteredCode.Length - 1);
         }
-        //Attempt to join the lobby
+        //TODO: Attempt to join the lobby
         else if (codeValue == '>')
         {
 
         }
         else
         {
-            m_enteredCode += codeValue;
-            Debug.Log("Entered: " + m_enteredCode);
+            //Limits the 
+            if (m_enteredCode.Length <= m_maxCodeLength - 1)
+            {
+                m_enteredCode += codeValue;
+            }
         }
 
-
-        
         UpdateText();
     }
     #endregion
