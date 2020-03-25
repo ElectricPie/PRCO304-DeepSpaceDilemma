@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+[RequireComponent(typeof(LobbyNetworkManager))]
 public class MenuLobbyController : MonoBehaviour
 {
     #region Private Variables
@@ -12,9 +13,11 @@ public class MenuLobbyController : MonoBehaviour
 
     [Tooltip("The maximum lenth of the code")]
     [SerializeField]
-    private int m_maxCodeLength;
+    private int m_maxCodeLength = 4;
 
-    private string m_enteredCode;
+    private string m_enteredCode = "";
+
+    private LobbyNetworkManager m_lobbyNetworkManager = null;
     #endregion
 
 
@@ -23,6 +26,7 @@ public class MenuLobbyController : MonoBehaviour
     void Start()
     {
         m_enteredCode = "";
+        m_lobbyNetworkManager = this.GetComponent<LobbyNetworkManager>();
     }
 
     // Update is called once per frame
@@ -52,7 +56,11 @@ public class MenuLobbyController : MonoBehaviour
         //TODO: Attempt to join the lobby
         else if (codeValue == '>')
         {
-
+            
+        }
+        else if (codeValue == '+')
+        {
+            m_lobbyNetworkManager.CreateNewLobby();
         }
         else
         {
