@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Trigger : MonoBehaviour
 {
+    #region Private Variables
+    [Tooltip("The objects that will be changed when the trigger is used")]
     [SerializeField]
     protected GameObject[] m_triggerTargets;
+    #endregion
 
+
+    #region Protected Methods
     protected void ActivateTrigger()
     {
         for (int i = 0; i < m_triggerTargets.Length; i++)
@@ -38,4 +43,5 @@ public class Trigger : MonoBehaviour
             }
         }
     }
+    #endregion
 }
