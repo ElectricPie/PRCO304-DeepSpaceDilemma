@@ -65,6 +65,7 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
             m_roomCode = GenerateCode();
 
             PhotonNetwork.CreateRoom(m_roomCode, new RoomOptions { MaxPlayers = m_maxPlayersPerRoom });
+            this.GetComponent<MenuLobbyController>().EnteredLobby();
         }
     }
     #endregion
@@ -78,6 +79,7 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
         {
             m_roomCode = GenerateCode();
             PhotonNetwork.CreateRoom(m_roomCode, new RoomOptions { MaxPlayers = m_maxPlayersPerRoom });
+            this.GetComponent<MenuLobbyController>().EnteredLobby();
         }
         else
         {

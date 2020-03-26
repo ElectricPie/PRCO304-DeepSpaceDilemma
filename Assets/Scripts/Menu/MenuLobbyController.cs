@@ -9,11 +9,15 @@ public class MenuLobbyController : MonoBehaviour
     #region Private Serialize Variables
     [Tooltip("The text mesh object that will display the code")]
     [SerializeField]
-    private TextMesh m_codeDisplay;
+    private TextMesh m_codeDisplay = null;
 
     [Tooltip("The maximum lenth of the code")]
     [SerializeField]
     private int m_maxCodeLength = 4;
+
+    [Tooltip("The game object which contains the buttons used to enter the code")]
+    [SerializeField]
+    private GameObject m_inputKeys = null;
     #endregion
 
     #region Private Variables
@@ -74,6 +78,11 @@ public class MenuLobbyController : MonoBehaviour
         }
 
         UpdateText();
+    }
+
+    public void EnteredLobby()
+    {
+        m_inputKeys.SetActive(false);
     }
     #endregion
 
