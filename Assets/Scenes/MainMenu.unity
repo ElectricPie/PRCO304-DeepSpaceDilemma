@@ -961,7 +961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee5e1fdef1bac34ba46670e0e559a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_inputCharacter: 68
+  m_inputCharacter: 52
   m_controller: {fileID: 1868215841}
 --- !u!65 &402347815
 BoxCollider:
@@ -1380,7 +1380,7 @@ PrefabInstance:
     - target: {fileID: 5592918972961700762, guid: 116832367835a104c9803353c1562f55,
         type: 3}
       propertyPath: m_Name
-      value: Button A
+      value: Button '1'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 116832367835a104c9803353c1562f55, type: 3}
@@ -1601,7 +1601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee5e1fdef1bac34ba46670e0e559a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_inputCharacter: 66
+  m_inputCharacter: 50
   m_controller: {fileID: 1868215841}
 --- !u!65 &753802134
 BoxCollider:
@@ -1848,10 +1848,15 @@ PrefabInstance:
       propertyPath: m_triggerTargets.Array.data[0]
       value: 
       objectReference: {fileID: 745003952}
+    - target: {fileID: 5592918972961700761, guid: 116832367835a104c9803353c1562f55,
+        type: 3}
+      propertyPath: m_triggerTargets.Array.data[1]
+      value: 
+      objectReference: {fileID: 745003952}
     - target: {fileID: 5592918972961700762, guid: 116832367835a104c9803353c1562f55,
         type: 3}
       propertyPath: m_Name
-      value: Button B
+      value: Button '2'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 116832367835a104c9803353c1562f55, type: 3}
@@ -1951,7 +1956,7 @@ PrefabInstance:
     - target: {fileID: 5592918972961700762, guid: 116832367835a104c9803353c1562f55,
         type: 3}
       propertyPath: m_Name
-      value: Button C
+      value: Button '3'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 116832367835a104c9803353c1562f55, type: 3}
@@ -3115,7 +3120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_codeDisplay: {fileID: 2034248662}
-  m_maxCodeLength: 4
+  m_maxCodeLength: 8
 --- !u!114 &1868215842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3585,7 +3590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee5e1fdef1bac34ba46670e0e559a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_inputCharacter: 65
+  m_inputCharacter: 49
   m_controller: {fileID: 1868215841}
 --- !u!65 &1966002618
 BoxCollider:
@@ -3618,7 +3623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee5e1fdef1bac34ba46670e0e559a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_inputCharacter: 67
+  m_inputCharacter: 51
   m_controller: {fileID: 1868215841}
 --- !u!65 &1981684334
 BoxCollider:
@@ -3723,7 +3728,7 @@ PrefabInstance:
     - target: {fileID: 5592918972961700762, guid: 116832367835a104c9803353c1562f55,
         type: 3}
       propertyPath: m_Name
-      value: Button D
+      value: Button '4'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 116832367835a104c9803353c1562f55, type: 3}

@@ -6,15 +6,19 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-
+[RequireComponent(typeof(MenuLobbyController))]
 public class LobbyNetworkManager : MonoBehaviourPunCallbacks
 {
     #region Private Variables
     [Tooltip("The maximum number of players a room can hold")]
     [SerializeField]
     private byte m_maxPlayersPerRoom = 5;
+    #endregion
 
+
+    #region Private Variables
     private string m_gameVersion = "1";
+    private string m_roomCode = "";
     private bool m_isConnecting;
     #endregion
 
@@ -44,24 +48,36 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined room with " + PhotonNetwork.CurrentRoom.PlayerCount + " players");
+        Debug.Log("In Lobby: " + PhotonNetwork.CurrentRoom.Name);
+
     }
 
     public override void OnConnectedToMaster()
     {
         Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
     }
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        //Generates code utill an unqiue one is created
+        while (!PhotonNetwork.InRoom)
+        {
+            m_roomCode = GenerateCode();
+
+            PhotonNetwork.CreateRoom(m_roomCode, new RoomOptions { MaxPlayers = m_maxPlayersPerRoom });
+        }
+    }
     #endregion
 
 
     #region Public Methods
-    public void CreateNewLobby()
+    public void CreateNewLobby(string lobbyCode)
     {
-        
-
+        Debug.Log("In lobby: " + PhotonNetwork.InRoom);
         if (!PhotonNetwork.InRoom)
         {
-            PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = m_maxPlayersPerRoom });
-            Debug.Log("In Lobby: " + PhotonNetwork.InLobby);
+            m_roomCode = GenerateCode();
+            PhotonNetwork.CreateRoom(m_roomCode, new RoomOptions { MaxPlayers = m_maxPlayersPerRoom });
         }
         else
         {
@@ -85,6 +101,19 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
             m_isConnecting = PhotonNetwork.ConnectUsingSettings();
             PhotonNetwork.GameVersion = m_gameVersion;
         }
+    }
+
+    private string GenerateCode()
+    {
+        string generatedCode = "";
+
+        //Generate a code of length equal to the value set in the MenuLobbyController
+        for (int i = 0; i < this.GetComponent<MenuLobbyController>().MaxCodeLength; i++)
+        {
+            generatedCode += Random.Range(1, 5);        
+        }
+
+        return generatedCode;
     }
     #endregion
 }

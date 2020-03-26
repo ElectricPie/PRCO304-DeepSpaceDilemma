@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(LobbyNetworkManager))]
 public class MenuLobbyController : MonoBehaviour
 {
-    #region Private Variables
+    #region Private Serialize Variables
     [Tooltip("The text mesh object that will display the code")]
     [SerializeField]
     private TextMesh m_codeDisplay;
@@ -14,7 +14,9 @@ public class MenuLobbyController : MonoBehaviour
     [Tooltip("The maximum lenth of the code")]
     [SerializeField]
     private int m_maxCodeLength = 4;
+    #endregion
 
+    #region Private Variables
     private string m_enteredCode = "";
 
     private LobbyNetworkManager m_lobbyNetworkManager = null;
@@ -60,7 +62,7 @@ public class MenuLobbyController : MonoBehaviour
         }
         else if (codeValue == '+')
         {
-            m_lobbyNetworkManager.CreateNewLobby();
+            m_lobbyNetworkManager.CreateNewLobby(m_enteredCode);
         }
         else
         {
@@ -72,6 +74,14 @@ public class MenuLobbyController : MonoBehaviour
         }
 
         UpdateText();
+    }
+    #endregion
+
+
+    #region Properties
+    public int MaxCodeLength
+    {
+        get { return m_maxCodeLength; }
     }
     #endregion
 }
