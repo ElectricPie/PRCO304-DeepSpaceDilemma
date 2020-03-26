@@ -7,6 +7,10 @@ using UnityEngine;
 public class MenuLobbyController : MonoBehaviour
 {
     #region Private Serialize Variables
+    [Tooltip("The text object which displays the subtitle")]
+    [SerializeField]
+    private TextMesh m_subtitleText = null;
+
     [Tooltip("The text mesh object that will display the code")]
     [SerializeField]
     private TextMesh m_codeDisplay = null;
@@ -80,9 +84,12 @@ public class MenuLobbyController : MonoBehaviour
         UpdateText();
     }
 
-    public void EnteredLobby()
+    public void EnteredLobby(string lobbyCode)
     {
         m_inputKeys.SetActive(false);
+        m_subtitleText.text = "Hosting Game";
+        m_enteredCode = lobbyCode;
+        UpdateText();
     }
     #endregion
 
