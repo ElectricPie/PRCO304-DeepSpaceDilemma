@@ -4673,6 +4673,7 @@ GameObject:
   - component: {fileID: 33012279276391179}
   - component: {fileID: 23755735749170773}
   - component: {fileID: 1866510799}
+  - component: {fileID: 1182285510265684}
   m_Layer: 0
   m_Name: SM_Bld_Wall_Door_01
   m_TagString: Untagged
@@ -4680,6 +4681,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1182285510265684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182285510265683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f262c4ffb3c855946b4fc3d866b02f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_openYIncrease: 2.7
 --- !u!1 &1182559925552203
 GameObject:
   m_ObjectHideFlags: 0
@@ -6728,7 +6742,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182285510265683}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 10.66944, y: -3.4198265, z: 10.596277}
+  m_LocalPosition: {x: 10.65, y: -6.17, z: 10.596277}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 231170445}
