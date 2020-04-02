@@ -7,26 +7,12 @@ using Photon.Pun;
 
 public class LobbyOptionsController : UserInputConsole
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
     #region Public Methods
     public override void EnterCharacterCode(char codeValue)
     {
-        //Removes a character from the string
+        //Starts the game
         if (codeValue == '^')
         {
-            
             StartGame();
         }
     }
@@ -39,9 +25,11 @@ public class LobbyOptionsController : UserInputConsole
         //Makes sure the client is in a room
         if (PhotonNetwork.InRoom)
         {
+            //Prevents anyone but the creator of the room from starting the game
             if (PhotonNetwork.IsMasterClient)
             {
                 Debug.Log("Starting Game");
+                PhotonNetwork.LoadLevel("SpaceStation");
             }
             else
             {
