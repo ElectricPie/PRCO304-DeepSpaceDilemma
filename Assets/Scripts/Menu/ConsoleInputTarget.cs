@@ -11,14 +11,14 @@ public class ConsoleInputTarget : MonoBehaviour, ITriggerTarget
 
     [Tooltip("The console controller")]
     [SerializeField]
-    private MenuLobbyController m_controller;
+    private UserInputConsole m_controller;
     #endregion
 
 
     #region Trigger Methods
     public void Activate()
     {
-        m_controller.EnterCodeCharacter(m_inputCharacter);
+        m_controller.EnterCharacterCode(m_inputCharacter);
     }
 
     public void Deactivate()

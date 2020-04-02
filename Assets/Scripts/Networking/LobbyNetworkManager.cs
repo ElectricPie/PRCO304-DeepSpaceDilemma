@@ -72,7 +72,7 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
 
 
     #region Public Methods
-    public void CreateNewLobby(string lobbyCode)
+    public void CreateNewLobby()
     {
         Debug.Log("In lobby: " + PhotonNetwork.InRoom);
         if (!PhotonNetwork.InRoom)
@@ -85,6 +85,11 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
         {
             Debug.Log("Already in a room");
         }
+    }
+
+    public void JoinLobby(string lobbyCode)
+    {
+        PhotonNetwork.JoinRoom(lobbyCode);
     }
     #endregion
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(LobbyNetworkManager))]
-public class MenuLobbyController : MonoBehaviour
+public class MenuLobbyController : UserInputConsole
 {
     #region Private Serialize Variables
     [Tooltip("The text object which displays the subtitle")]
@@ -56,7 +56,7 @@ public class MenuLobbyController : MonoBehaviour
 
 
     #region Public Methods
-    public void EnterCodeCharacter(char codeValue)
+    public override void EnterCharacterCode(char codeValue)
     {
         //Removes a character from the string
         if (codeValue == '<' && m_enteredCode.Length > 0)
@@ -70,7 +70,7 @@ public class MenuLobbyController : MonoBehaviour
         }
         else if (codeValue == '+')
         {
-            m_lobbyNetworkManager.CreateNewLobby(m_enteredCode);
+            m_lobbyNetworkManager.CreateNewLobby();
         }
         else
         {
