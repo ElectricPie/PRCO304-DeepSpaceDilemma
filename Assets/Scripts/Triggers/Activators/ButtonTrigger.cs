@@ -6,7 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class ButtonTrigger : Trigger
 {
-    #region Private Variables
+    #region Private Serialized Variables
     [Tooltip("Sets the button so that only the host of the lobby can use it")]
     [SerializeField]
     private bool m_hostUseOnly;
@@ -15,8 +15,11 @@ public class ButtonTrigger : Trigger
     private bool m_clientAffectOnly;
     [Tooltip("Sets if the button requires another press to deactivate the targets")]
     [SerializeField]
-    private bool m_toggleButton;
+    private bool m_toggleButton = false;
+    #endregion
 
+
+    #region Private Variables
     private bool m_isActive = false;
 
     private List<GameObject> m_currentColliders;
@@ -32,6 +35,16 @@ public class ButtonTrigger : Trigger
         m_currentColliders = new List<GameObject>();
     }
 
+    void Update()
+    {
+        //TODO: Remove when not needed
+        if (m_activateTriggers)
+        {
+            UseButton();
+            m_activateTriggers = !m_activateTriggers;
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
         //TODO: Add check for master
@@ -41,23 +54,7 @@ public class ButtonTrigger : Trigger
             m_currentColliders.Add(other.gameObject);
 
             //TODO: Only change client settings
-            
-            if (m_toggleButton)
-            {
-                if (m_isActive)
-                {
-                    DeactivateTrigger();
-                }
-                else
-                {
-                    ActivateTrigger();
-                }
-                m_isActive = !m_isActive;
-            }
-            else
-            {
-                ActivateTrigger();
-            }
+            UseButton();
         }
     }
 
@@ -69,6 +66,30 @@ public class ButtonTrigger : Trigger
         if (!m_toggleButton && m_currentColliders.Count == 0)
         {
             DeactivateTrigger();
+        }
+    }
+    #endregion
+
+
+    #region Private Methods
+    private void UseButton()
+    {
+        if (m_toggleButton)
+        { 
+            if (m_isActive)
+            {
+                DeactivateTrigger();
+            }
+            else
+            {
+                ActivateTrigger();
+            }
+
+            m_isActive = !m_isActive;
+        }
+        else
+        {
+            ActivateTrigger();
         }
     }
     #endregion

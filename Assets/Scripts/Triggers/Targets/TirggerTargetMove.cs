@@ -4,38 +4,46 @@ using UnityEngine;
 
 public class TirggerTargetMove : MonoBehaviour, ITriggerTarget
 {
-    //Public
-    public Vector3 targetDestination;
+    #region Private Seralizable Variables
+    [SerializeField]
+    private Vector3 m_targetDestination;
+    #endregion
 
-    //Private
+
+    #region Private Variables
     private Vector3 m_originalPosition;
+    private bool m_isOpen = false;
+    #endregion
 
+
+    #region Monobehaviour Callbacks
     // Start is called before the first frame update
     void Start()
     {
-        m_originalPosition = this.transform.position;   
+        m_originalPosition = this.transform.localPosition;   
     }
+    #endregion
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
+    #region Public Methods
     public void Activate()
     {
-        this.transform.position = targetDestination;
+        this.transform.localPosition = m_originalPosition + m_targetDestination;
     }
 
     public void Deactivate()
     {
-        this.transform.position = m_originalPosition;
+        this.transform.localPosition = m_originalPosition;
     }
+    #endregion
 
+
+    #region Gizmo Methods
     void OnDrawGizmos()
     {
         //Create a sphere where the object will move to
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(targetDestination, 0.05f);
+        Gizmos.DrawSphere((this.transform.localPosition + m_targetDestination), 0.1f);
     }
+    #endregion
 }
