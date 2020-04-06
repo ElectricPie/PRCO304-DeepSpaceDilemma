@@ -28,12 +28,20 @@ public class TirggerTargetMove : MonoBehaviour, ITriggerTarget
     #region Public Methods
     public void Activate()
     {
-        this.transform.localPosition = m_originalPosition + m_targetDestination;
+        if (m_isOpen)
+        {
+            this.transform.localPosition = m_originalPosition;
+        }
+        else
+        {
+            this.transform.localPosition = m_originalPosition + m_targetDestination;
+        }
+        m_isOpen = !m_isOpen;
     }
 
     public void Deactivate()
     {
-        this.transform.localPosition = m_originalPosition;
+        Activate();
     }
     #endregion
 
