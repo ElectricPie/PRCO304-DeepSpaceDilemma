@@ -4,27 +4,27 @@ using UnityEngine;
 
 public class ItemTrigger : Trigger
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    #region Private Seralizable Variables
+    [SerializeField]
+    private GameObject[] m_triggerItems;
+    #endregion
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
+    #region Monobehaviour Callbacks
     void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<TriggerItem>())
-        {
-            Debug.Log("ITrigger Item");
-            base.ActivateTrigger();
+        for (int i = 0; i < m_triggerItems.Length; i++) { 
+            if (other.gameObject == m_triggerItems[i])
+            {
+                Debug.Log("ITrigger Item");
+                base.ActivateTrigger();
+            }
         }
     }
+    #endregion
 
+
+    #region Gizmo Callbacks
     void OnDrawGizmos()
     {
         Collider collider = this.GetComponent<Collider>();
@@ -40,4 +40,5 @@ public class ItemTrigger : Trigger
             Debug.LogWarning(this + " is missing a collider");
         }
     }
+    #endregion
 }
