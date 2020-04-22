@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 using Photon.Pun;
 
-public class VRCharacterController : MonoBehaviourPunCallbacks
+public class VRCharacterController : Character
 {
     #region Public Variables
     public float speed = 5.0f;
