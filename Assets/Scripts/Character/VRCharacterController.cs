@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -46,6 +46,7 @@ public class VRCharacterController : Character
     // Start is called before the first frame update
     void Start()
     {
+        base.Start();
         m_characterController = this.GetComponent<CharacterController>();
 
         SceneManager.sceneLoaded += OnSceneLoaded;

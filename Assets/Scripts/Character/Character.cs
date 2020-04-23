@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,13 +11,14 @@ public class Character : MonoBehaviourPunCallbacks
     [SerializeField]
     private int m_startingHealth = 30;
 
+    [SerializeField]
     private int m_currentHealth;
     #endregion
 
 
     #region Monobehavior Callbacks
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         //Sets the characters health when starting
         m_currentHealth = m_startingHealth;
@@ -35,7 +36,7 @@ public class Character : MonoBehaviourPunCallbacks
     /// <summary>
     /// Deals damage to the character
     /// </summary>
-    /// <param name="damageValue">The amount of damage that will be dealt</param>
+    /// <param name="damageValue">The amount of damage that will be dealt to the character</param>
     public void TakeDamage(int damageValue) 
     {
         m_currentHealth -= damageValue;
