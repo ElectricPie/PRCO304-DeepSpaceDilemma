@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class Magazine : GrabableObject
 {
-    #region Private Variables
+    #region Private Serialized Variables
+    [Tooltip("The amount of ammo that a magazine can hold")]
     [SerializeField]
     private int m_ammoCount = 30;
+
+    [Tooltip("The name of the magazine type so the weapon can only accecpt the right type")]
+    [SerializeField]
+    private string m_magazineTypeName;
+    #endregion
+
+    #region Private Variables
     private MagZone m_magZone;
     #endregion
 
@@ -53,6 +61,11 @@ public class Magazine : GrabableObject
     public int Ammo
     {
         get { return m_ammoCount; }
+    }
+
+    public string MagazineType
+    {
+        get { return m_magazineTypeName; }
     }
     #endregion
 }

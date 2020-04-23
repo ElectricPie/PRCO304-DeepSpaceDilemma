@@ -27,28 +27,31 @@ public class MagZone : MonoBehaviour
         //Checks of the object has the magazine grab script and checks if there is a magazine already loaded
         if (other.GetComponent<Magazine>() && m_currentMag == null)
         {
-            //Checks if the magazine has a parent
-            if (other.GetComponent<Magazine>().Parent != null)
+            //Checks that the magazine is the correct type for the weapon
+            if (other.GetComponent<Magazine>().MagazineType == m_weapon.MagazineType.GetComponent<Magazine>().MagazineType)
             {
-                //If the magazine has a parent that is a socket then prevent reloading
-                if (other.GetComponent<Magazine>().Parent.GetComponent<Socket>() != null)
+                //Checks if the magazine has a parent
+                if (other.GetComponent<Magazine>().Parent != null)
                 {
-                    return;
+                    //If the magazine has a parent that is a socket then prevent reloading
+                    if (other.GetComponent<Magazine>().Parent.GetComponent<Socket>() != null)
+                    {
+                        return;
+                    }
                 }
+
+                m_currentMag = other.gameObject;
+                m_weapon.Reload(other.gameObject);
+                m_currentMag.GetComponent<Magazine>().MagZone = this;
+                //Attach the magazine to the weapon
+                m_currentMag.transform.parent = m_weapon.gameObject.transform;
+                //Correctly sets the magazines position and rotation
+                m_currentMag.transform.localPosition = this.transform.localPosition;
+                m_currentMag.transform.localRotation = Quaternion.Euler(Vector3.zero);
+                //Prevents the new magazine from moving
+                m_currentMag.GetComponent<Rigidbody>().isKinematic = true;
+                m_currentMag.GetComponent<Collider>().isTrigger = true;
             }
-
-            m_currentMag = other.gameObject;
-            m_weapon.Reload(other.gameObject);
-            m_currentMag.GetComponent<Magazine>().MagZone = this;
-            //Attach the magazine to the weapon
-            m_currentMag.transform.parent = m_weapon.gameObject.transform;
-            //Correctly sets the magazines position and rotation
-            m_currentMag.transform.localPosition = this.transform.localPosition;
-            m_currentMag.transform.localRotation = Quaternion.Euler(Vector3.zero);
-            //Prevents the new magazine from moving
-            m_currentMag.GetComponent<Rigidbody>().isKinematic = true;
-            m_currentMag.GetComponent<Collider>().isTrigger = true;
-
         }
     }
     #endregion

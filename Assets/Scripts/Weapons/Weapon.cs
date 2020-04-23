@@ -22,7 +22,7 @@ public class Weapon : GrabableObject
     #endregion
 
 
-    #region Private Variables
+    #region Private Serialized Variables
     [Tooltip("The amount of damage the weapon will deal if a shot hits a character")]
     [SerializeField]
     private int m_damage = 4;
@@ -31,6 +31,13 @@ public class Weapon : GrabableObject
     [SerializeField]
     private Vector3 m_raycastStart = Vector3.zero;
 
+    [Tooltip("The prefab magazine that is used for this weapon")]
+    [SerializeField]
+    private GameObject m_magazinePrefab = null;
+    #endregion
+
+
+    #region Private Variables
     private float m_fireRate = 0.2f;
     private Magazine m_magazine;
     #endregion
@@ -144,6 +151,14 @@ public class Weapon : GrabableObject
 
         //Shoots if the trigger is still down
         Shoot();
+    }
+    #endregion
+
+
+    #region Properties
+    public GameObject MagazineType
+    {
+        get { return m_magazinePrefab; }
     }
     #endregion
 
