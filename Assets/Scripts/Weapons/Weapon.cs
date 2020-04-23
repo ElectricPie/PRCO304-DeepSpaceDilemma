@@ -95,7 +95,7 @@ public class Weapon : GrabableObject
     {
         RaycastHit hit;
         //Create a raycast from the guns raycast start point going forward for infinity
-        if (Physics.Raycast(this.transform.localPosition + m_raycastStart, this.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+        if (Physics.Raycast(this.transform.position + m_raycastStart, this.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
         {
            
             //Check if there is a loaded magazine
@@ -111,11 +111,14 @@ public class Weapon : GrabableObject
                     if (hit.transform.GetComponent<Character>())
                     {
                         hit.transform.GetComponent<Character>().TakeDamage(m_damage);
+                        //TODO: Add effect for hitting character
                     }
-
-                    //TODO: Replace with creating decal
-                    GameObject tempImpact = Instantiate(inpactDecal);
-                    tempImpact.transform.position = hit.point;
+                    else
+                    {
+                        //TODO: Replace with creating decal
+                        GameObject tempImpact = Instantiate(inpactDecal);
+                        tempImpact.transform.position = hit.point;
+                    }
                 }
                 else
                 {
