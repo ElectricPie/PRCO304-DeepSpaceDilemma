@@ -6,13 +6,16 @@ using Photon.Pun;
 
 public class Character : MonoBehaviourPunCallbacks
 {
-    #region Private Vairables
+    #region Protected Serialize Variables
     [Tooltip("The starting amount of health a character has")]
     [SerializeField]
-    private int m_startingHealth = 30;
+    protected int m_startingHealth = 30;
+    #endregion
 
-    [SerializeField]
-    private int m_currentHealth;
+
+    #region Private Variables
+    [SerializeField] //TODO: Removed serialize field
+    protected int m_currentHealth;
     #endregion
 
 
@@ -37,7 +40,7 @@ public class Character : MonoBehaviourPunCallbacks
     /// Deals damage to the character
     /// </summary>
     /// <param name="damageValue">The amount of damage that will be dealt to the character</param>
-    public void TakeDamage(int damageValue) 
+    public virtual void TakeDamage(int damageValue) 
     {
         m_currentHealth -= damageValue;
 
