@@ -997,6 +997,7 @@ MonoBehaviour:
   speed: 5
   gravity: 20
   body: {fileID: 632676894}
+  m_healthDisplay: {fileID: 0}
 --- !u!114 &7226363838938217956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1016,7 +1017,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 5244878907068189681}
-  viewIdField: 2
+  viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &5244878907068189681

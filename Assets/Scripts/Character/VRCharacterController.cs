@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 using Photon.Pun;
+
+using TMPro;
 
 public class VRCharacterController : Character
 {
@@ -13,6 +16,13 @@ public class VRCharacterController : Character
 
     public GameObject body;
     public static GameObject localPlayerInstance;
+    #endregion
+
+
+    #region Private Serialize Variables
+    [Tooltip("The text mesh pro game object which will display the players health")]
+    [SerializeField]
+    private TextMeshPro m_healthDisplay;
     #endregion
 
 
@@ -47,6 +57,8 @@ public class VRCharacterController : Character
     void Start()
     {
         base.Start();
+        UpdatePlayerHealthDisplay();
+
         m_characterController = this.GetComponent<CharacterController>();
 
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -91,6 +103,15 @@ public class VRCharacterController : Character
     #endregion
 
 
+    #region Public Methods
+    public override void TakeDamage(int damageValue)
+    {
+        base.TakeDamage(damageValue);
+        UpdatePlayerHealthDisplay();
+    }
+    #endregion
+
+
     #region Private Methods
     private void UpdateMovement()
     {
@@ -114,6 +135,11 @@ public class VRCharacterController : Character
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadingMode)
     {
         this.CalledOnLevelWasLoaded(scene.buildIndex);
+    }
+
+    private void UpdatePlayerHealthDisplay()
+    {
+        m_healthDisplay.text = m_currentHealth + "/" + m_startingHealth;
     }
     #endregion
 }
