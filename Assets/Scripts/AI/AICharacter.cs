@@ -56,9 +56,11 @@ public class AICharacter : Character
         {
             foreach (GameObject character in m_charactersInRange)
             {
+                Debug.DrawRay(this.transform.position, (character.transform.position + new Vector3(0, 1, 0) - this.transform.position), Color.green);
+                
                 RaycastHit hit;
-                //Create a raycast from the AI to the character to see if anything is in the way
-                if (Physics.Raycast(this.transform.localPosition, character.transform.position - this.transform.position, out hit, Mathf.Infinity))
+                //Create a raycast from the AI to 1 unit above character to see if anything is in the way
+                if (Physics.Raycast(this.transform.position, character.transform.position + new Vector3(0, 1, 0) - this.transform.position, out hit, Mathf.Infinity))
                 {
                     if (hit.transform.GetComponent<Character>())
                     {
@@ -74,10 +76,27 @@ public class AICharacter : Character
             //Checks if the target is in range
             if (Vector3.Distance(this.transform.position, m_target.transform.position) <= m_engagementDistance && !m_isAttacking)
             {
-                m_agent.isStopped = true;
-                Debug.Log("<a>AI Character</a> has started attacking", this.gameObject);
-                InvokeRepeating("AttackTarget", m_attackTime, m_attackTime);
-                m_isAttacking = true;
+                //Debug.Log("RANGE :: <a>AI Character</a> is within attack range (" + Vector3.Distance(this.transform.position, m_target.transform.position) + " < " + m_engagementDistance + ")", this.gameObject);
+                Debug.DrawRay(this.transform.position, (m_target.transform.position + new Vector3(0, 1, 0) - this.transform.position), Color.red);
+
+                RaycastHit hit;
+                //Create a raycast from the AI to the character to see if anything is in the way
+                if (Physics.Raycast(this.transform.position, (m_target.transform.position + new Vector3(0, 1, 0) - this.transform.position), out hit, Mathf.Infinity))
+                {
+                    Debug.Log("Hit: " + hit.transform.gameObject);
+
+                    //Starts attacking the target if there is nothing in the way
+                    if (hit.transform.gameObject == m_target)
+                    {
+                        m_agent.isStopped = true;
+                        Debug.Log("ATTACKING :: <a>AI Character</a> has started attacking", this.gameObject);
+                        InvokeRepeating("AttackTarget", m_attackTime, m_attackTime);
+                        m_isAttacking = true;
+                    }
+                }
+
+
+               
             }
             else if (Vector3.Distance(this.transform.position, m_target.transform.position) > m_engagementDistance)
             {
@@ -111,6 +130,7 @@ public class AICharacter : Character
     #region Private Methods
     private void MoveToDestination()
     {
+        m_agent.isStopped = false;
         m_agent.SetDestination(m_target.transform.position);
     }
 
