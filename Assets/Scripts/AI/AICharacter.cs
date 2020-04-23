@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -11,13 +11,26 @@ public class AICharacter : Character
     [Tooltip("The world location the AI will move to")]
     [SerializeField]
     private Vector3 m_destination;
+
+    [Tooltip("The distance from the AI to the target before the AI can attack the target")]
+    [SerializeField]
+    private float m_engagementDistance = 5.0f;
+
+    [Tooltip("The delay in seconds between the AIs attacks")]
+    [SerializeField]
+    private float m_attackTime = 3.0f;
+
+    [Tooltip("The amount of damage that the AI will deal to its target")]
+    [SerializeField]
+    private int m_attackDamage = 2;
     #endregion
 
 
     #region Private Vairables
     private NavMeshAgent m_agent;
     private List<GameObject> m_charactersInRange;
-    private GameObject m_target;
+    private GameObject m_target = null;
+    private bool m_isAttacking = false;
     #endregion
 
 
@@ -56,6 +69,24 @@ public class AICharacter : Character
                 }
             }
         }
+        else
+        {
+            //Checks if the target is in range
+            if (Vector3.Distance(this.transform.position, m_target.transform.position) <= m_engagementDistance && !m_isAttacking)
+            {
+                m_agent.isStopped = true;
+                Debug.Log("<a>AI Character</a> has started attacking", this.gameObject);
+                InvokeRepeating("AttackTarget", m_attackTime, m_attackTime);
+                m_isAttacking = true;
+            }
+            else if (Vector3.Distance(this.transform.position, m_target.transform.position) > m_engagementDistance)
+            {
+                Debug.Log(" <a>AI Character</a> has stopped attacking", this.gameObject);
+                CancelInvoke("AttackTarget");
+                MoveToDestination();
+                m_isAttacking = false;
+            }
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -81,6 +112,15 @@ public class AICharacter : Character
     private void MoveToDestination()
     {
         m_agent.SetDestination(m_target.transform.position);
+    }
+
+    private void AttackTarget() 
+    {
+        Debug.Log("Ai has attacked <a>target</a>", m_target);
+        if (m_target != null)
+        {
+            m_target.GetComponent<Character>().TakeDamage(m_attackDamage);
+        }
     }
     #endregion
 
