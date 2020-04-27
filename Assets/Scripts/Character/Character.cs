@@ -57,7 +57,7 @@ public class Character : MonoBehaviourPunCallbacks
     #endregion
 
     #region Private Methods
-    private void Die()
+    protected virtual void Die()
     {
         Debug.Log("<a>character</a> has died", this.gameObject);
 

@@ -94,9 +94,6 @@ public class AICharacter : Character
                         m_isAttacking = true;
                     }
                 }
-
-
-               
             }
             else if (Vector3.Distance(this.transform.position, m_target.transform.position) > m_engagementDistance)
             {
@@ -141,6 +138,13 @@ public class AICharacter : Character
         {
             m_target.GetComponent<Character>().TakeDamage(m_attackDamage);
         }
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+
+        GameObject.Destroy(this.gameObject);
     }
     #endregion
 
