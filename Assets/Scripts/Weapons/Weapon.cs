@@ -12,34 +12,46 @@ public class Weapon : GrabableObject
     }
 
     #region Public Variables
-    public Vector3 grabPoint;
-    public float grabRotation = 36.0f;
-
-    //TODO: Replace with sprite
-    public GameObject inpactDecal;
-
-    public FireMode fireMode;
+    [Tooltip("SAFE: Prevents firing | SEMI: Fires one bullet when trigger pulled | FULL: Fires a bullet depending on the fire rate" )]
+    public FireMode fireMode = FireMode.full;
     #endregion
 
 
     #region Private Serialized Variables
+    [Tooltip("The point on the weapon that is place into the players hand")]
+    [SerializeField]
+    private Vector3 m_grabPoint = Vector3.zero;
+
+    [Tooltip("The angle the weapon is angled at when it is grabed by a player")]
+    [SerializeField]
+    private float m_grabRotation = 36.0f;
+
+    [Tooltip("The image that will apear at a bullet impact")]
+    [SerializeField]
+    //TODO: Replace with sprite
+    private GameObject m_inpactDecal = null;
+
     [Tooltip("The amount of damage the weapon will deal if a shot hits a character")]
     [SerializeField]
     private int m_damage = 4;
-
-    [Tooltip("The local position on the weapon where the raycast will start")]
+    
+    [Tooltip("The interval in seconds between bullets firing")]
     [SerializeField]
-    private Vector3 m_raycastStart = Vector3.zero;
+    private float m_fireRate = 0.2f;
 
     [Tooltip("The prefab magazine that is used for this weapon")]
     [SerializeField]
     private GameObject m_magazinePrefab = null;
+
+    [Tooltip("The point where the projectiles will exit the weapon from")]
+    [SerializeField]
+    private GameObject m_firingPoint = null;
     #endregion
 
 
     #region Private Variables
-    private float m_fireRate = 0.2f;
-    private Magazine m_magazine;
+    
+    private Magazine m_magazine = null;
     #endregion
 
 
@@ -52,10 +64,10 @@ public class Weapon : GrabableObject
             return false;
         }
 
-        Vector3 rotation = new Vector3(grabRotation, 0, 0);
+        Vector3 rotation = new Vector3(m_grabRotation, 0, 0);
 
         this.transform.localRotation = Quaternion.Euler(rotation);
-        this.transform.localPosition = Vector3.zero - grabPoint;
+        this.transform.localPosition = Vector3.zero - m_grabPoint;
 
         //Return true when succesful
         return true;
@@ -102,7 +114,7 @@ public class Weapon : GrabableObject
     {
         RaycastHit hit;
         //Create a raycast from the guns raycast start point going forward for infinity
-        if (Physics.Raycast(this.transform.position + m_raycastStart, this.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+        if (Physics.Raycast(m_firingPoint.transform.position, this.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
         {
            
             //Check if there is a loaded magazine
@@ -123,7 +135,7 @@ public class Weapon : GrabableObject
                     else
                     {
                         //TODO: Replace with creating decal
-                        GameObject tempImpact = Instantiate(inpactDecal);
+                        GameObject tempImpact = Instantiate(m_inpactDecal);
                         tempImpact.transform.position = hit.point;
                     }
                 }
@@ -168,10 +180,10 @@ public class Weapon : GrabableObject
     {
         //Create a sphere where the grab point will be
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(this.transform.position + grabPoint, 0.05f);
-        //Creates a green cube where the raycast start will be
+        Gizmos.DrawSphere(this.transform.position + m_grabPoint, 0.05f);
+        //Creates a green cube where the raycast for firing will be
         Gizmos.color = Color.green;
-        Gizmos.DrawCube(this.transform.localPosition + m_raycastStart, new Vector3(0.05f, 0.05f, 0.05f));
+        Gizmos.DrawCube(m_firingPoint.transform.position, new Vector3(0.05f, 0.05f, 0.05f));
     }
     #endregion
 }

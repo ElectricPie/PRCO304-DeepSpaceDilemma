@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class WeaponTests : MonoBehaviour
 {
+    #region Monobehaviour Callbacks
     // Start is called before the first frame update
     void Start()
     {
+        this.GetComponent<Weapon>().fireMode = Weapon.FireMode.semi;
         InvokeRepeating("Fire", 1.0f, 0.3f);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    #endregion
+    
+    
     #region Private Methods
     private void Fire()
     {
