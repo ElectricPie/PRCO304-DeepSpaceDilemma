@@ -34,8 +34,9 @@
         return o;
     }
     ENDCG
-        SubShader
+    SubShader
     {
+        Tags { "Queue" = "Transparent" }
         //Outline
         Pass
         {
