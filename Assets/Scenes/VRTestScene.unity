@@ -566,7 +566,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 349383319}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10b2116d64fe1dc4789a370ae3e18f90, type: 3}
+  m_Script: {fileID: 11500000, guid: 5bdb4d9364ff5434eb61a3856794f284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &349383321
@@ -874,7 +874,7 @@ PrefabInstance:
     - target: {fileID: 395975855519910832, guid: ef210fe4f02136c488c2b43c06a6c94c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 395975855519910832, guid: ef210fe4f02136c488c2b43c06a6c94c,
         type: 3}
@@ -1496,7 +1496,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1408202940
 MonoBehaviour:
@@ -1510,7 +1510,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bdb4d9364ff5434eb61a3856794f284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tesst: {fileID: 4800000, guid: ed08be6c36686cd488d5f0ed4abe52a7, type: 3}
 --- !u!1 &1420614991
 GameObject:
   m_ObjectHideFlags: 0

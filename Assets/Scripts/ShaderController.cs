@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class ShaderController : MonoBehaviour
 {
-    #region Private Serialized Variables
-    [SerializeField]
-    private Shader m_outlineShader;
-    #endregion
-
-
     #region Private Variables
     private Renderer m_renderer = null;
     private Shader m_originalShader = null;
@@ -21,32 +15,25 @@ public class ShaderController : MonoBehaviour
     void Start()
     {
         m_renderer = this.GetComponent<Renderer>();
-        m_originalShader = m_renderer.material.shader;
-
-        Invoke("ChangeShader", 2.0f);
-        Invoke("ChangeShaderBack", 4.0f);
     }
     #endregion
 
 
-    #region Private Methods
-    private void ChangeShader()
+    #region Public Methods
+    public void EnableOutline(float outlineWidth, Color outlineColor)
     {
-        if (m_renderer != null && m_outlineShader != null)
+        if (m_renderer != null)
         {
-            //Changes the current shader to the outline shader
-            m_renderer.material.shader = m_outlineShader;
-            //Sets the colour of the outline shader
-            m_renderer.material.SetColor("_OutlineColor", Color.green);
+            m_renderer.material.SetFloat("_OutlineWidth", outlineWidth);
+            m_renderer.material.SetColor("_OutlineColor", outlineColor);
         }
     }
 
-    private void ChangeShaderBack()
+    public void DisableOutline()
     {
-        if (m_renderer != null && m_originalShader != null)
+        if (m_renderer != null)
         {
-            //Changes the shader back to the original shader
-            m_renderer.material.shader = m_originalShader;
+            m_renderer.material.SetFloat("_OutlineWidth", 1.0f);
         }
     }
     #endregion
