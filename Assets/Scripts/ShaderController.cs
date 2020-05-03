@@ -8,11 +8,10 @@ public class ShaderController : MonoBehaviour
     [Tooltip("The outline shader so only the right object have the shader")]
     [SerializeField]
     private Shader m_outlineShader = null;
-    #endregion
 
-
-    #region Private Variables
-    private Renderer m_renderer = null;
+    [Tooltip("The model that will have the outline shader applied")]
+    [SerializeField]
+    private Renderer m_renderer;
     #endregion
 
 
@@ -20,7 +19,11 @@ public class ShaderController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_renderer = this.GetComponent<Renderer>();
+        //Gets the gameobjects renderer if none is provided
+        if (m_renderer == null)
+        {
+            m_renderer = this.GetComponent<Renderer>();
+        }
 
         //Sets the shader to the object so only that object has the shader and not the material
         if (m_outlineShader != null)

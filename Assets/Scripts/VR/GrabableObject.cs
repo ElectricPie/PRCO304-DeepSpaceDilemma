@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(ShaderController))]
 public class GrabableObject : MonoBehaviour
 {
     #region Protected Variables
