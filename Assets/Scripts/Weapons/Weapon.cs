@@ -50,6 +50,10 @@ public class Weapon : GrabableObject
     [Tooltip("The amount the roation will increase by when the weapon is fired per second")]
     [SerializeField]
     private float m_recoilIncreaseAmount = 0.2f;
+
+    [Tooltip("The maximum rotation the weapon will rotated whilst firing")]
+    [SerializeField]
+    private float m_maxRecoil = 0;
     #endregion
 
 
@@ -62,7 +66,7 @@ public class Weapon : GrabableObject
     void Update()
     {
         //Rotates the weapon whilst it is firing
-        if (m_isFiring)
+        if (m_isFiring && this.transform.localRotation.x > m_maxRecoil)
         {
             this.transform.Rotate(Time.deltaTime * -m_recoilIncreaseAmount, 0, 0);
         }
