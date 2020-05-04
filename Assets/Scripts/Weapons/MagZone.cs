@@ -43,6 +43,8 @@ public class MagZone : MonoBehaviour
                 m_currentMag = other.gameObject;
                 m_weapon.Reload(other.gameObject);
                 m_currentMag.GetComponent<Magazine>().MagZone = this;
+                //Disables the magazines outline shader
+                m_currentMag.GetComponent<Magazine>().DisableShader();
                 //Attach the magazine to the weapon
                 m_currentMag.transform.parent = m_weapon.gameObject.transform;
                 //Correctly sets the magazines position and rotation

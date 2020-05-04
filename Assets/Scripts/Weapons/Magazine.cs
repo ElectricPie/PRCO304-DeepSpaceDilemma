@@ -46,6 +46,25 @@ public class Magazine : GrabableObject
         return true;
     }
 
+    /// <summary>
+    /// Disables the outline shader if it is on the magazine
+    /// </summary>
+    public void DisableShader()
+    {
+        //Prevents the shader being enabled when in a weapon
+        if (m_shaderController != null)
+        {
+            m_shaderController.DisableOutline();
+        }
+        else
+        {
+            Debug.LogError("Shader Controller Missing from <a>" + this.gameObject.name + "<a> ", this.gameObject);
+        }
+    }
+
+    /// <summary>
+    /// Reduces the ammo stored in the magazine by 1
+    /// </summary>
     public void UseAmmo()
     {
         m_ammoCount--;
