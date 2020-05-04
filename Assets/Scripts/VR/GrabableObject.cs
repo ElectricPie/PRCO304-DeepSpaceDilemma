@@ -3,10 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(ShaderController))]
 public class GrabableObject : MonoBehaviour
 {
     #region Protected Variables
-    protected GameObject m_parent;
+    protected GameObject m_parent = null;
+    protected ShaderController m_shaderController = null;
+    #endregion
+
+
+    #region Monobehaviour Callbacks
+    void Start()
+    {
+        m_shaderController = this.GetComponent<ShaderController>();
+    }
     #endregion
 
 
@@ -33,7 +43,6 @@ public class GrabableObject : MonoBehaviour
             }
         }
 
-        
         //Set the collider to a trigger so that other things can still interact
         this.GetComponent<Collider>().isTrigger = true;
         //Disables the rigidbody
@@ -43,6 +52,15 @@ public class GrabableObject : MonoBehaviour
         this.transform.SetParent(parent.transform);
 
         m_parent = parent;
+
+        if (m_shaderController != null)
+        {
+            m_shaderController.DisableOutline();
+        }
+        else
+        {
+            Debug.LogError("Shader Controller Missing from <a>" + this.gameObject.name + "<a> ", this.gameObject);
+        }
     
         return true;
     }
@@ -55,6 +73,15 @@ public class GrabableObject : MonoBehaviour
         this.GetComponent<Collider>().isTrigger = false;
         //Enables the rigidbody
         this.GetComponent<Rigidbody>().isKinematic = false;
+
+        if (m_shaderController != null)
+        {
+            m_shaderController.EnableOutline(1.05f, Color.yellow);
+        }
+        else
+        {
+            Debug.LogError("Shader Controller Missing from <a>" + this.gameObject.name + "<a> ", this.gameObject);
+        }
     }
 
     public virtual void Interact()
