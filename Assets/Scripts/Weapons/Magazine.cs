@@ -14,6 +14,7 @@ public class Magazine : GrabableObject
     private string m_magazineTypeName;
     #endregion
 
+
     #region Private Variables
     private MagZone m_magZone;
     #endregion
