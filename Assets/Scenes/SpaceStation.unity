@@ -55734,6 +55734,17 @@ PrefabInstance:
       propertyPath: fireMode
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 244980791322135265, guid: ed7f3c7148912c34185a0b07720844ce,
+        type: 3}
+      propertyPath: m_inpactDecal
+      value: 
+      objectReference: {fileID: 5020160789685352177, guid: c3cfa36a64e71ad4689907f07da9236e,
+        type: 3}
+    - target: {fileID: 244980791322135265, guid: ed7f3c7148912c34185a0b07720844ce,
+        type: 3}
+      propertyPath: m_recoilIncreaseAmount
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 244980791322135267, guid: ed7f3c7148912c34185a0b07720844ce,
         type: 3}
       propertyPath: m_Name

@@ -12,7 +12,7 @@ public class Weapon : GrabableObject
     }
 
     #region Public Variables
-    [Tooltip("SAFE: Prevents firing | SEMI: Fires one bullet when trigger pulled | FULL: Fires a bullet depending on the fire rate" )]
+    [Tooltip("SAFE: Prevents firing | SEMI: Fires one bullet when trigger pulled | FULL: Fires a bullet depending on the fire rate")]
     public FireMode fireMode = FireMode.full;
     #endregion
 
@@ -34,7 +34,7 @@ public class Weapon : GrabableObject
     [Tooltip("The amount of damage the weapon will deal if a shot hits a character")]
     [SerializeField]
     private int m_damage = 4;
-    
+
     [Tooltip("The interval in seconds between bullets firing")]
     [SerializeField]
     private float m_fireRate = 0.2f;
@@ -46,11 +46,32 @@ public class Weapon : GrabableObject
     [Tooltip("The point where the projectiles will exit the weapon from")]
     [SerializeField]
     private GameObject m_firingPoint = null;
+
+    [Tooltip("The amount the roation will increase by when the weapon is fired per second")]
+    [SerializeField]
+    private float m_recoilIncreaseAmount = 0.2f;
     #endregion
 
 
     #region Private Variables
-    
+    private bool m_isFiring = false;
+    #endregion
+
+
+    #region Monobehaviour Callbacks
+    void Update()
+    {
+        //Rotates the weapon whilst it is firing
+        if (m_isFiring)
+        {
+            this.transform.Rotate(Time.deltaTime * -m_recoilIncreaseAmount, 0, 0);
+        }
+    }
+    #endregion
+
+
+    #region Private Variables
+
     private Magazine m_magazine = null;
     #endregion
 
@@ -80,7 +101,7 @@ public class Weapon : GrabableObject
         {
             Shoot();
         }
-        else if(fireMode == FireMode.full)
+        else if (fireMode == FireMode.full)
         {
             InvokeRepeating("ShootFullAuto", 0.0f, m_fireRate);
         }
@@ -116,16 +137,18 @@ public class Weapon : GrabableObject
         //Create a raycast from the guns raycast start point going forward for infinity
         if (Physics.Raycast(m_firingPoint.transform.position, this.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
         {
-           
+
             //Check if there is a loaded magazine
             if (m_magazine != null)
             {
                 //Check that the magazine has ammo in it
                 if (m_magazine.Ammo > 0)
                 {
+                    m_isFiring = true;
+
                     //Use the ammo from the weapon
                     m_magazine.UseAmmo();
-                    
+
                     //Deal damage to the first hit if they are a character
                     if (hit.transform.GetComponent<Character>())
                     {
@@ -141,6 +164,7 @@ public class Weapon : GrabableObject
                 }
                 else
                 {
+                    m_isFiring = false;
                     Debug.Log("Magazine Empty");
                 }
             }
@@ -158,6 +182,7 @@ public class Weapon : GrabableObject
         {
             //Stops the invoke and the function
             CancelInvoke("ShootFullAuto");
+            m_isFiring = false;
             return;
         }
 
