@@ -55745,6 +55745,11 @@ PrefabInstance:
       propertyPath: m_recoilIncreaseAmount
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 244980791322135265, guid: ed7f3c7148912c34185a0b07720844ce,
+        type: 3}
+      propertyPath: m_maxRecoil
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 244980791322135267, guid: ed7f3c7148912c34185a0b07720844ce,
         type: 3}
       propertyPath: m_Name

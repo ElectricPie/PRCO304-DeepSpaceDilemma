@@ -52,8 +52,9 @@ public class Weapon : GrabableObject
     private float m_recoilIncreaseAmount = 0.2f;
 
     [Tooltip("The maximum rotation the weapon will rotated whilst firing")]
+    [Range(1,36)]
     [SerializeField]
-    private float m_maxRecoil = 0;
+    private float m_maxRecoil = 1.0f;
     #endregion
 
 
@@ -65,10 +66,20 @@ public class Weapon : GrabableObject
     #region Monobehaviour Callbacks
     void Update()
     {
+        float currrentXRotation = this.transform.localRotation.eulerAngles.x;
+        
         //Rotates the weapon whilst it is firing
-        if (m_isFiring && this.transform.localRotation.x > m_maxRecoil)
+        if (m_isFiring && currrentXRotation > m_maxRecoil)
         {
             this.transform.Rotate(Time.deltaTime * -m_recoilIncreaseAmount, 0, 0);
+        }
+        else 
+        {
+            //Stops the weapon rotating whilst not held and rotates it back to the grab rotation when not firing
+            if (m_parent != null && currrentXRotation < m_grabRotation)
+            {
+                this.transform.Rotate(Time.deltaTime * m_recoilIncreaseAmount, 0, 0);
+            }
         }
     }
     #endregion
