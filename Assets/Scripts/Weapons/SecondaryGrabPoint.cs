@@ -43,4 +43,22 @@ public class SecondaryGrabPoint : GrabableObject
         Gizmos.DrawSphere(this.transform.position, 0.05f);
     }
     #endregion
+
+
+    #region Properties
+    public bool IsGrabbed
+    {
+        get
+        {
+            if (m_hand == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+    }
+    #endregion
 }

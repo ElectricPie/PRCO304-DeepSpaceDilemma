@@ -55,6 +55,10 @@ public class Weapon : GrabableObject
     [Range(1,36)]
     [SerializeField]
     private float m_maxRecoil = 1.0f;
+
+    [Tooltip("The game object with the secondary grab point attached to it")]
+    [SerializeField]
+    private SecondaryGrabPoint m_secondaryGrabPoint;
     #endregion
 
 
@@ -71,7 +75,21 @@ public class Weapon : GrabableObject
         //Rotates the weapon whilst it is firing
         if (m_isFiring && currrentXRotation > m_maxRecoil)
         {
-            this.transform.Rotate(Time.deltaTime * -m_recoilIncreaseAmount, 0, 0);
+            float recoilAmmount = m_recoilIncreaseAmount;
+            //Reduces the recoil if a second point is grabed
+            if (m_secondaryGrabPoint != null)
+            {
+                if (m_secondaryGrabPoint.IsGrabbed)
+                {
+                    recoilAmmount /= 2;
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Weapon <a>" + this + "</a> is missing secondary grab point");
+            }
+
+            this.transform.Rotate(Time.deltaTime * -recoilAmmount, 0, 0);
         }
         else 
         {
