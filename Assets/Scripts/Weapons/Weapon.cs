@@ -12,7 +12,7 @@ public class Weapon : GrabableObject
     }
 
     #region Public Variables
-    [Tooltip("SAFE: Prevents firing | SEMI: Fires one bullet when trigger pulled | FULL: Fires a bullet depending on the fire rate" )]
+    [Tooltip("SAFE: Prevents firing | SEMI: Fires one bullet when trigger pulled | FULL: Fires a bullet depending on the fire rate")]
     public FireMode fireMode = FireMode.full;
     #endregion
 
@@ -34,7 +34,7 @@ public class Weapon : GrabableObject
     [Tooltip("The amount of damage the weapon will deal if a shot hits a character")]
     [SerializeField]
     private int m_damage = 4;
-    
+
     [Tooltip("The interval in seconds between bullets firing")]
     [SerializeField]
     private float m_fireRate = 0.2f;
@@ -46,11 +46,65 @@ public class Weapon : GrabableObject
     [Tooltip("The point where the projectiles will exit the weapon from")]
     [SerializeField]
     private GameObject m_firingPoint = null;
+
+    [Tooltip("The amount the roation will increase by when the weapon is fired per second")]
+    [SerializeField]
+    private float m_recoilIncreaseAmount = 0.2f;
+
+    [Tooltip("The maximum rotation the weapon will rotated whilst firing")]
+    [Range(3,36)]
+    [SerializeField]
+    private float m_maxRecoil = 1.0f;
+
+    [Tooltip("The game object with the secondary grab point attached to it")]
+    [SerializeField]
+    private SecondaryGrabPoint m_secondaryGrabPoint;
     #endregion
 
 
     #region Private Variables
-    
+    private bool m_isFiring = false;
+    #endregion
+
+
+    #region Monobehaviour Callbacks
+    void Update()
+    {
+        float currrentXRotation = this.transform.localRotation.eulerAngles.x;
+        
+        //Rotates the weapon whilst it is firing
+        if (m_isFiring && currrentXRotation > m_maxRecoil)
+        {
+            float recoilAmmount = m_recoilIncreaseAmount;
+            //Reduces the recoil if a second point is grabed
+            if (m_secondaryGrabPoint != null)
+            {
+                if (m_secondaryGrabPoint.IsGrabbed)
+                {
+                    recoilAmmount /= 2;
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Weapon <a>" + this + "</a> is missing secondary grab point");
+            }
+
+            this.transform.Rotate(Time.deltaTime * -recoilAmmount, 0, Time.deltaTime * Random.Range(-50.0f, 50.0f));
+        }
+        else 
+        {
+            //Stops the weapon rotating whilst not held and rotates it back to the grab rotation when not firing
+            if (m_parent != null && currrentXRotation < m_grabRotation)
+            {
+                this.transform.Rotate(Time.deltaTime * m_recoilIncreaseAmount, 0, 0);
+            }
+        }
+    }
+    #endregion
+
+
+    #region Private Variables
+
     private Magazine m_magazine = null;
     #endregion
 
@@ -80,7 +134,7 @@ public class Weapon : GrabableObject
         {
             Shoot();
         }
-        else if(fireMode == FireMode.full)
+        else if (fireMode == FireMode.full)
         {
             InvokeRepeating("ShootFullAuto", 0.0f, m_fireRate);
         }
@@ -116,16 +170,18 @@ public class Weapon : GrabableObject
         //Create a raycast from the guns raycast start point going forward for infinity
         if (Physics.Raycast(m_firingPoint.transform.position, this.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
         {
-           
+
             //Check if there is a loaded magazine
             if (m_magazine != null)
             {
                 //Check that the magazine has ammo in it
                 if (m_magazine.Ammo > 0)
                 {
+                    m_isFiring = true;
+
                     //Use the ammo from the weapon
                     m_magazine.UseAmmo();
-                    
+
                     //Deal damage to the first hit if they are a character
                     if (hit.transform.GetComponent<Character>())
                     {
@@ -141,6 +197,7 @@ public class Weapon : GrabableObject
                 }
                 else
                 {
+                    m_isFiring = false;
                     Debug.Log("Magazine Empty");
                 }
             }
@@ -158,6 +215,7 @@ public class Weapon : GrabableObject
         {
             //Stops the invoke and the function
             CancelInvoke("ShootFullAuto");
+            m_isFiring = false;
             return;
         }
 
