@@ -91,7 +91,17 @@ public class Grab : MonoBehaviour
         //Checks of the object has the grabable script
         if (other.GetComponent<GrabableObject>())
         {
+            if (m_lastCollision != null && m_lastCollision.GetComponent<GrabableObject>().Parent == null)
+            {
+                m_lastCollision.GetComponent<ShaderController>().EnableOutline(1.05f, Color.yellow);
+            }
+
             m_lastCollision = other.gameObject;
+
+            if (m_lastCollision.GetComponent<GrabableObject>().Parent == null && m_lastCollision.GetComponent<ShaderController>())
+            {
+                m_lastCollision.GetComponent<ShaderController>().EnableOutline(1.05f, Color.green);
+            }
         }
     }
 
@@ -100,6 +110,11 @@ public class Grab : MonoBehaviour
         //Checks that the object was the last collision and removes it if it is
         if (other.GetComponent<GrabableObject>() && other.gameObject == m_lastCollision)
         {
+            if (m_lastCollision.GetComponent<GrabableObject>().Parent == null && m_lastCollision.GetComponent<ShaderController>())
+            {
+                m_lastCollision.GetComponent<ShaderController>().EnableOutline(1.05f, Color.yellow);
+            }
+
             m_lastCollision = null;
         }
     }
