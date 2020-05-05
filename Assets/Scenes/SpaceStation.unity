@@ -55709,6 +55709,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 244980791322135265, guid: ed7f3c7148912c34185a0b07720844ce,
+        type: 3}
+      propertyPath: m_secondaryGrabPoint
+      value: 
+      objectReference: {fileID: 1711094292}
+    - target: {fileID: 244980791322135265, guid: ed7f3c7148912c34185a0b07720844ce,
+        type: 3}
+      propertyPath: m_maxRecoil
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 244980791322135267, guid: ed7f3c7148912c34185a0b07720844ce,
         type: 3}
       propertyPath: m_Name
@@ -56667,6 +56677,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1710422099}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1711094292 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 674745718, guid: ed7f3c7148912c34185a0b07720844ce,
+    type: 3}
+  m_PrefabInstance: {fileID: 1675367433}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ffd6b6ae4dd6e4ab66419f9a9368e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1711202415
 PrefabInstance:
   m_ObjectHideFlags: 0

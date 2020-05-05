@@ -52,7 +52,7 @@ public class Weapon : GrabableObject
     private float m_recoilIncreaseAmount = 0.2f;
 
     [Tooltip("The maximum rotation the weapon will rotated whilst firing")]
-    [Range(1,36)]
+    [Range(3,36)]
     [SerializeField]
     private float m_maxRecoil = 1.0f;
 
@@ -89,7 +89,7 @@ public class Weapon : GrabableObject
                 Debug.LogWarning("Weapon <a>" + this + "</a> is missing secondary grab point");
             }
 
-            this.transform.Rotate(Time.deltaTime * -recoilAmmount, 0, 0);
+            this.transform.Rotate(Time.deltaTime * -recoilAmmount, 0, Time.deltaTime * Random.Range(-50.0f, 50.0f));
         }
         else 
         {
