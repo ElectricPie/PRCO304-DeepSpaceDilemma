@@ -20,9 +20,9 @@ public class VRCharacterController : Character
 
 
     #region Private Serialize Variables
-    [Tooltip("The text mesh pro game object which will display the players health")]
+    [Tooltip("The object with the PlayerHealthBar script")]
     [SerializeField]
-    private TextMeshPro m_healthDisplay;
+    private PlayerHealthBar m_healthBar = null;
     #endregion
 
 
@@ -57,11 +57,18 @@ public class VRCharacterController : Character
     void Start()
     {
         base.Start();
-        UpdatePlayerHealthDisplay();
 
         m_characterController = this.GetComponent<CharacterController>();
 
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        InvokeRepeating("Test", 1.0f, 1.0f);
+        
+    }
+
+    public void Test()
+    {
+        TakeDamage(1);
     }
 
     // Update is called once per frame
@@ -139,7 +146,7 @@ public class VRCharacterController : Character
 
     private void UpdatePlayerHealthDisplay()
     {
-        m_healthDisplay.text = m_currentHealth + "/" + m_startingHealth;
+        m_healthBar.UpdateHealth(m_currentHealth, m_startingHealth);
     }
     #endregion
 }

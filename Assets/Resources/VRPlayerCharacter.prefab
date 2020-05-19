@@ -2949,15 +2949,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4674977152809701539}
-  m_LocalRotation: {x: -0.11315439, y: 0.47211757, z: 0.47174913, w: 0.73603934}
-  m_LocalPosition: {x: -6.957, y: 5.209, z: 2.401}
+  m_LocalRotation: {x: -0.31585488, y: 0.3201578, z: 0.58561194, w: 0.6743837}
+  m_LocalPosition: {x: -8.927, y: 1.327, z: -0.713}
   m_LocalScale: {x: 10, y: -10, z: 10}
   m_Children:
   - {fileID: 4814646943309321005}
   - {fileID: 8218404615378411072}
   m_Father: {fileID: 206032851162541498}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -37.735, y: 48.056004, z: 47.988003}
+  m_LocalEulerAnglesHint: {x: -53.225002, y: 5.933, z: 78.965004}
 --- !u!95 &4516361271762523867
 Animator:
   serializedVersion: 3
@@ -3961,6 +3961,7 @@ MonoBehaviour:
   gravity: 20
   body: {fileID: 632676894}
   m_healthDisplay: {fileID: 426680333}
+  m_healthBar: {fileID: 0}
 --- !u!114 &7226363838938217956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4260,7 +4261,7 @@ GameObject:
   - component: {fileID: 1737719321352631380}
   - component: {fileID: 1019973594597342308}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Green Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4273,12 +4274,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6669045505394102297}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.096, y: 0.018, z: 0.017}
-  m_LocalScale: {x: 0.016430993, y: 1, z: 0.02366338}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 6585481646424950780}
-  m_RootOrder: 3
+  m_Father: {fileID: 3295602242344468974}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7745674281705656918
 MeshFilter:
@@ -6282,7 +6283,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7130927463747288582}
   m_LocalRotation: {x: -0.11315439, y: 0.47211757, z: 0.47174913, w: 0.73603934}
-  m_LocalPosition: {x: 7.414224, y: -4.285977, z: -2.5947905}
+  m_LocalPosition: {x: 7.258, y: -4.435, z: -2.76}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 7133678426383112186}
@@ -7485,6 +7486,52 @@ Transform:
   m_Father: {fileID: 4795843501312339416}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7352374215574660395
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3295602242344468974}
+  - component: {fileID: 1445378863}
+  m_Layer: 0
+  m_Name: Health Bars
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3295602242344468974
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7352374215574660395}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.098, y: 0.017, z: 0.012}
+  m_LocalScale: {x: 0.01643099, y: 1, z: 0.02366338}
+  m_Children:
+  - {fileID: 622441982268694181}
+  - {fileID: 4551403489585642580}
+  m_Father: {fileID: 6585481646424950780}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1445378863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7352374215574660395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca41defa90d14bb479cf80ebecfbafcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_positiveHealth: {fileID: 6669045505394102297}
 --- !u!1 &7456626470931900670
 GameObject:
   m_ObjectHideFlags: 0
@@ -7670,7 +7717,7 @@ GameObject:
   - component: {fileID: 6277737610719513779}
   - component: {fileID: 7539716117637975351}
   m_Layer: 0
-  m_Name: Plane (1)
+  m_Name: Red Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7683,12 +7730,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8567454313582311971}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.096, y: 0.018, z: 0.017}
-  m_LocalScale: {x: 0.016430993, y: 1, z: 0.02366338}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.0038, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 6585481646424950780}
-  m_RootOrder: 4
+  m_Father: {fileID: 3295602242344468974}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6428094189676635068
 MeshFilter:
@@ -7716,7 +7763,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e40b18a2d148cf849a065662bc3d9109, type: 2}
+  - {fileID: 2100000, guid: c96cdcf986ec79847b6b84b687f9f454, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

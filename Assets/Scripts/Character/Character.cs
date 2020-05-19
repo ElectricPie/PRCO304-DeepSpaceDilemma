@@ -56,6 +56,7 @@ public class Character : MonoBehaviourPunCallbacks
     }
     #endregion
 
+
     #region Private Methods
     protected virtual void Die()
     {
