@@ -69,8 +69,9 @@ public class VRCharacterController : Character
         //Stop the chracter if the client is connected to the server and the character is not the client
         if (PhotonNetwork.IsConnected)
         {
+            Debug.Log("Connected: " + PhotonNetwork.IsConnected + " | IsClients: " + photonView.IsMine);
             //Stops the rest of the method if the character is not the clients
-            if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
+            if (PhotonNetwork.InRoom && !photonView.IsMine)
             {
                 return;
             }
@@ -114,6 +115,7 @@ public class VRCharacterController : Character
     #region Private Methods
     private void UpdateMovement()
     {
+        Debug.Log("Moving");
         //Get movement input
         Vector3 moveDirection = Vector3.zero;
         //Gets the forward vector from the camera so that forward/backward movement will happen
