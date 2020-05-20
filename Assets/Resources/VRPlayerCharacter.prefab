@@ -3955,13 +3955,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d949dd54e29628e4a97d03270b79e1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_startingHealth: 30
+  m_startingHealth: 10
   m_currentHealth: 0
   speed: 5
   gravity: 20
   body: {fileID: 632676894}
-  m_healthDisplay: {fileID: 426680333}
-  m_healthBar: {fileID: 0}
+  m_healthBar: {fileID: 1445378863}
 --- !u!114 &7226363838938217956
 MonoBehaviour:
   m_ObjectHideFlags: 0

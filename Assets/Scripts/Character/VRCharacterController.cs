@@ -60,15 +60,7 @@ public class VRCharacterController : Character
 
         m_characterController = this.GetComponent<CharacterController>();
 
-        SceneManager.sceneLoaded += OnSceneLoaded;
-
-        InvokeRepeating("Test", 1.0f, 1.0f);
-        
-    }
-
-    public void Test()
-    {
-        TakeDamage(1);
+        SceneManager.sceneLoaded += OnSceneLoaded;        
     }
 
     // Update is called once per frame
