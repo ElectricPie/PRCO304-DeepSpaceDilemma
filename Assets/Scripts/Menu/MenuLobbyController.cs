@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(LobbyNetworkManager))]
@@ -9,11 +9,11 @@ public class MenuLobbyController : UserInputConsole
     #region Private Serialize Variables
     [Tooltip("The text object which displays the subtitle")]
     [SerializeField]
-    private TextMesh m_subtitleText = null;
+    private TextMeshPro m_subtitleText = null;
 
     [Tooltip("The text mesh object that will display the code")]
     [SerializeField]
-    private TextMesh m_codeDisplay = null;
+    private TextMeshPro m_codeDisplay = null;
 
     [Tooltip("The maximum lenth of the code")]
     [SerializeField]
@@ -23,6 +23,7 @@ public class MenuLobbyController : UserInputConsole
     [SerializeField]
     private GameObject m_inputKeys = null;
     #endregion
+
 
     #region Private Variables
     private string m_enteredCode = "";
