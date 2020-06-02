@@ -5350,30 +5350,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 426680333, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64, type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 426680333, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64, type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 426680333, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64, type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 426680333, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64, type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 426680335, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 663937480, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64, type: 3}
-      propertyPath: m_isLeftHand
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 883075248086246181, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64,
         type: 3}
       propertyPath: m_Mesh
@@ -5387,7 +5363,7 @@ PrefabInstance:
     - target: {fileID: 6590026733900793214, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.345
+      value: -2.74
       objectReference: {fileID: 0}
     - target: {fileID: 6590026733900793214, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64,
         type: 3}
@@ -5397,7 +5373,7 @@ PrefabInstance:
     - target: {fileID: 6590026733900793214, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.922
+      value: 2.54
       objectReference: {fileID: 0}
     - target: {fileID: 6590026733900793214, guid: 438fa843789b9ef4c9bf9ecb9e9fcd64,
         type: 3}
