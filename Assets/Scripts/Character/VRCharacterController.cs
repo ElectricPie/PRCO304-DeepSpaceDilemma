@@ -14,8 +14,8 @@ public class VRCharacterController : Character
     public float speed = 5.0f;
     public float gravity = 9.8f;
 
-    public GameObject body;
-    public static GameObject localPlayerInstance;
+    public GameObject body = null;
+    public static GameObject localPlayerInstance = null;
     #endregion
 
 
@@ -27,7 +27,8 @@ public class VRCharacterController : Character
 
 
     #region Private Variables
-    private CharacterController m_characterController;
+    private CharacterController m_characterController = null;
+    private float m_quitTimer = 0;
     #endregion
 
 
@@ -69,15 +70,32 @@ public class VRCharacterController : Character
         //Stop the chracter if the client is connected to the server and the character is not the client
         if (PhotonNetwork.IsConnected)
         {
-            Debug.Log("Connected: " + PhotonNetwork.IsConnected + " | IsClients: " + photonView.IsMine);
+            //Debug.Log("Connected: " + PhotonNetwork.IsConnected + " | IsClients: " + photonView.IsMine);
             //Stops the rest of the method if the character is not the clients
             if (PhotonNetwork.InRoom && !photonView.IsMine)
             {
                 return;
             }
         }
-        
+
         UpdateMovement();
+
+        if (Input.GetButton("Menu"))
+        {
+            Debug.Log("Menu");
+            if (m_quitTimer >= 3)
+            {
+                Application.Quit();
+            }
+
+            m_quitTimer += Time.deltaTime;
+            Debug.Log("Timer: " + m_quitTimer);
+        }
+
+        if (Input.GetButtonDown("Menu"))
+        {
+            m_quitTimer = 0;
+        }
     }
 
     void CalledOnLevelWasLoaded(int level)
@@ -115,7 +133,7 @@ public class VRCharacterController : Character
     #region Private Methods
     private void UpdateMovement()
     {
-        Debug.Log("Moving");
+        //Debug.Log("Moving");
         //Get movement input
         Vector3 moveDirection = Vector3.zero;
         //Gets the forward vector from the camera so that forward/backward movement will happen

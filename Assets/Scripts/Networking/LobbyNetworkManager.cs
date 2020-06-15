@@ -54,7 +54,7 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
+        //Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
