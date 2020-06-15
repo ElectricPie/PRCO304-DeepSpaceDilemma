@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using Photon.Pun;
 
 using TMPro;
+using System;
 
 public class VRCharacterController : Character
 {
@@ -23,6 +24,10 @@ public class VRCharacterController : Character
     [Tooltip("The object with the PlayerHealthBar script")]
     [SerializeField]
     private PlayerHealthBar m_healthBar = null;
+
+    [Tooltip("The Players text display text mesh object")]
+    [SerializeField]
+    private TextMeshPro m_playerTextDisplay = null;
     #endregion
 
 
@@ -80,21 +85,35 @@ public class VRCharacterController : Character
 
         UpdateMovement();
 
+
         if (Input.GetButton("Menu"))
         {
-            Debug.Log("Menu");
-            if (m_quitTimer >= 3)
+            //Activate the text display
+            if (m_playerTextDisplay !=null)
+            {
+                m_playerTextDisplay.gameObject.SetActive(true);
+                m_playerTextDisplay.text = "QUITTING IN: " + Math.Floor(4 - m_quitTimer);
+            }
+
+            //Quits the program if the player holds down the button for 3 seconds or more
+            if (m_quitTimer >= 4)
             {
                 Application.Quit();
             }
 
             m_quitTimer += Time.deltaTime;
-            Debug.Log("Timer: " + m_quitTimer);
         }
 
-        if (Input.GetButtonDown("Menu"))
+        if (Input.GetButtonUp("Menu"))
         {
+            //Resets the timer
             m_quitTimer = 0;
+
+            //Dissables the text display
+            if (m_playerTextDisplay != null)
+            {
+                m_playerTextDisplay.gameObject.SetActive(false);
+            }
         }
     }
 
